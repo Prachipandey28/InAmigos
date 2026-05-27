@@ -1,154 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>InAmigos Foundation — Uniting Minds for a Change</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    :root{--green-deep:#1a4d2e;--green-mid:#2d7a4f;--green-light:#4caf72;--green-pale:#e8f5ed;--amber:#f5a623;--cream:#faf8f3;--dark:#111810;--text:#2c3e2e;--muted:#6b7c6d;--white:#ffffff;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>InAmigos Foundation — Uniting Minds for a Change</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --g1: #041209;
+  --g2: #0a2215;
+  --g3: #163d22;
+  --g4: #1e5c35;
+  --g5: #2d8a50;
+  --gold: #f5a623;
+  --gold2: #ffd166;
+  --gold-pale: #fff4e0;
+  --cream: #f8f5ef;
+  --white: #ffffff;
+  --dark: #08120a;
+  --text: #1e2e20;
+  --muted: #5a7060;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;cursor:none;}
 
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 6%;background:rgba(26,77,46,0.97);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(0,0,0,0.2);}
-    .nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--white);}
-    .nav-logo span{color:var(--amber);}
-    .nav-links{display:flex;gap:26px;list-style:none;}
-    .nav-links a{color:rgba(255,255,255,0.82);text-decoration:none;font-size:0.88rem;font-weight:500;transition:color .2s;}
-    .nav-links a:hover{color:var(--amber);}
-    .nav-cta{background:var(--amber)!important;color:var(--dark)!important;padding:8px 20px;border-radius:50px;font-weight:600!important;}
+/* CUSTOM CURSOR */
+.cursor{position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.15s ease,width 0.25s,height 0.25s;opacity:0.6;}
 
-    .hero{min-height:100vh;background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcwMCIgdmlld0JveD0iMCAwIDEyMDAgNzAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ic2t5IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDMzMjAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMWE2YjNhIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJzdW4iIGN4PSI3MCUiIGN5PSIyNSUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZjVhNjIzIiBzdG9wLW9wYWNpdHk9IjAuNCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9InRyYW5zcGFyZW50Ii8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3MDAiIGZpbGw9InVybCgjc2t5KSIvPgogIDxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcwMCIgZmlsbD0idXJsKCNzdW4pIi8+CiAgPCEtLSBncm91bmQgLS0+CiAgPGVsbGlwc2UgY3g9IjYwMCIgY3k9IjcwMCIgcng9IjcwMCIgcnk9IjE4MCIgZmlsbD0iIzBhMmExOCIvPgogIDwhLS0gcGVvcGxlIHNpbGhvdWV0dGVzIC0tPgogIDxnIGZpbGw9IiMwZDMzMjAiIG9wYWNpdHk9IjAuNyI+CiAgICA8ZWxsaXBzZSBjeD0iMjgwIiBjeT0iNTIwIiByeD0iMjgiIHJ5PSI2MCIvPgogICAgPGNpcmNsZSBjeD0iMjgwIiBjeT0iNDQwIiByPSIyMiIvPgogICAgPGVsbGlwc2UgY3g9IjM2MCIgY3k9IjUxMCIgcng9IjI2IiByeT0iNTUiLz4KICAgIDxjaXJjbGUgY3g9IjM2MCIgY3k9IjQzNSIgcj0iMjAiLz4KICAgIDxlbGxpcHNlIGN4PSI0NTAiIGN5PSI1MDUiIHJ4PSIzMCIgcnk9IjY1Ii8+CiAgICA8Y2lyY2xlIGN4PSI0NTAiIGN5PSI0MjAiIHI9IjI0Ii8+CiAgICA8ZWxsaXBzZSBjeD0iNTQwIiBjeT0iNTAwIiByeD0iMjgiIHJ5PSI2MCIvPgogICAgPGNpcmNsZSBjeD0iNTQwIiBjeT0iNDIwIiByPSIyMiIvPgogICAgPGVsbGlwc2UgY3g9IjY0MCIgY3k9IjUwNSIgcng9IjMyIiByeT0iNjUiLz4KICAgIDxjaXJjbGUgY3g9IjY0MCIgY3k9IjQxOCIgcj0iMjUiLz4KICAgIDxlbGxpcHNlIGN4PSI3MzAiIGN5PSI1MTAiIHJ4PSIyOCIgcnk9IjYwIi8+CiAgICA8Y2lyY2xlIGN4PSI3MzAiIGN5PSI0MzAiIHI9IjIyIi8+CiAgICA8ZWxsaXBzZSBjeD0iODIwIiBjeT0iNTE1IiByeD0iMjYiIHJ5PSI1OCIvPgogICAgPGNpcmNsZSBjeD0iODIwIiBjeT0iNDM3IiByPSIyMSIvPgogICAgPGVsbGlwc2UgY3g9IjkwMCIgY3k9IjUxMCIgcng9IjMwIiByeT0iNjIiLz4KICAgIDxjaXJjbGUgY3g9IjkwMCIgY3k9IjQyOCIgcj0iMjMiLz4KICA8L2c+CiAgPCEtLSByYWlzZWQgaGFuZHMgLS0+CiAgPGcgc3Ryb2tlPSIjZjVhNjIzIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuNiIgZmlsbD0ibm9uZSI+CiAgICA8bGluZSB4MT0iNDUwIiB5MT0iNDIwIiB4Mj0iNDMwIiB5Mj0iMzcwIi8+CiAgICA8bGluZSB4MT0iNTQwIiB5MT0iNDIwIiB4Mj0iNTYwIiB5Mj0iMzY1Ii8+CiAgICA8bGluZSB4MT0iNjQwIiB5MT0iNDE4IiB4Mj0iNjIwIiB5Mj0iMzY1Ii8+CiAgICA8bGluZSB4MT0iNzMwIiB5MT0iNDMwIiB4Mj0iNzQ4IiB5Mj0iMzc4Ii8+CiAgPC9nPgogIDwhLS0gdHJlZXMgLS0+CiAgPGcgZmlsbD0iIzBhMmExOCI+CiAgICA8cG9seWdvbiBwb2ludHM9IjEwMCw0ODAgMTMwLDM2MCAxNjAsNDgwIi8+CiAgICA8cG9seWdvbiBwb2ludHM9IjkwLDQ4MCAxMzAsMzIwIDE3MCw0ODAiLz4KICAgIDxyZWN0IHg9IjEyMiIgeT0iNDcwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiLz4KICAgIDxwb2x5Z29uIHBvaW50cz0iOTgwLDQ3MCAxMDEwLDM0MCAxMDQwLDQ3MCIvPgogICAgPHBvbHlnb24gcG9pbnRzPSI5NzAsNDc1IDEwMTAsMzAwIDEwNTAsNDc1Ii8+CiAgICA8cmVjdCB4PSIxMDAyIiB5PSI0NjIiIHdpZHRoPSIxNiIgaGVpZ2h0PSI0MiIvPgogIDwvZz4KICA8IS0tIHN0YXJzL2RvdHMgLS0+CiAgPGcgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNCI+CiAgICA8Y2lyY2xlIGN4PSIxNTAiIGN5PSI4MCIgcj0iMiIvPgogICAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iNTAiIHI9IjEuNSIvPgogICAgPGNpcmNsZSBjeD0iNTAwIiBjeT0iOTAiIHI9IjIiLz4KICAgIDxjaXJjbGUgY3g9IjcwMCIgY3k9IjYwIiByPSIxLjUiLz4KICAgIDxjaXJjbGUgY3g9IjkwMCIgY3k9Ijg1IiByPSIyIi8+CiAgICA8Y2lyY2xlIGN4PSIxMDUwIiBjeT0iNDUiIHI9IjEuNSIvPgogICAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTMwIiByPSIxIi8+CiAgICA8Y2lyY2xlIGN4PSI4MDAiIGN5PSIxMTAiIHI9IjEiLz4KICA8L2c+Cjwvc3ZnPg==") center/cover no-repeat;display:flex;align-items:center;padding:120px 6% 80px;position:relative;overflow:hidden;}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,42,20,0.85) 0%,rgba(10,24,14,0.7) 100%);}
-    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(to top,var(--cream),transparent);}
-    .hero-content{position:relative;z-index:1;max-width:680px;animation:fadeUp .9s ease both;}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.18);border:1px solid rgba(245,166,35,0.45);color:var(--amber);padding:6px 16px;border-radius:50px;font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:26px;}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:22px;}
-    .hero h1 em{color:var(--amber);font-style:normal;}
-    .hero p{font-size:1.05rem;color:rgba(255,255,255,0.8);line-height:1.8;max-width:560px;margin-bottom:38px;font-weight:300;}
-    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-    .btn-primary{background:var(--amber);color:var(--dark);padding:13px 30px;border-radius:50px;font-weight:700;font-size:0.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(245,166,35,0.4);}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,166,35,0.55);}
-    .btn-outline{background:transparent;color:var(--white);padding:12px 30px;border-radius:50px;border:2px solid rgba(255,255,255,0.4);font-weight:600;font-size:0.95rem;text-decoration:none;transition:all .2s;}
-    .btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.08);}
+/* NOISE TEXTURE overlay */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.4;}
 
-    .stats-strip{background:var(--green-deep);display:grid;grid-template-columns:repeat(4,1fr);text-align:center;}
-    .stat-item{padding:30px 20px;border-right:1px solid rgba(255,255,255,0.1);}
-    .stat-item:last-child{border-right:none;}
-    .stat-num{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:var(--amber);}
-    .stat-label{font-size:0.8rem;color:rgba(255,255,255,0.65);margin-top:4px;font-weight:500;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 6%;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s;}
+nav.scrolled{background:rgba(4,18,9,0.95);backdrop-filter:blur(20px);padding:14px 6%;box-shadow:0 2px 40px rgba(0,0,0,0.4);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--white);letter-spacing:-0.5px;text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--gold)!important;color:var(--dark)!important;padding:9px 22px;border-radius:3px;font-weight:600!important;}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:#e8940f!important;color:var(--dark)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{width:26px;height:2px;background:white;display:block;transition:all .3s;}
 
-    .section{padding:86px 6%;}
-    .section-tag{display:inline-block;background:var(--green-pale);color:var(--green-mid);font-size:0.74rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:14px;}
-    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:900;line-height:1.2;margin-bottom:18px;color:var(--dark);}
-    .section-title span{color:var(--green-mid);}
-    .section-sub{font-size:1.03rem;color:var(--muted);line-height:1.78;max-width:560px;}
+/* HERO */
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;}
+.hero-bg{position:absolute;inset:0;background:var(--g1);}
+.hero-bg svg{width:100%;height:100%;object-fit:cover;}
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(110deg,rgba(4,18,9,0.92) 0%,rgba(4,18,9,0.6) 55%,rgba(4,18,9,0.2) 100%);}
+.hero-content{position:relative;z-index:2;padding:0 7%;max-width:780px;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.hero-eyebrow-line{width:40px;height:1px;background:var(--gold);}
+.hero-eyebrow span{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,7vw,5.5rem);font-weight:700;color:var(--white);line-height:1.05;margin-bottom:28px;letter-spacing:-1px;}
+.hero h1 .line2{color:var(--gold);display:block;}
+.hero h1 .word-highlight{position:relative;display:inline-block;}
+.hero h1 .word-highlight::after{content:'';position:absolute;bottom:4px;left:0;right:0;height:3px;background:var(--gold);opacity:0.5;transform:scaleX(0);transform-origin:left;animation:underlineIn 0.8s 1.2s ease forwards;}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,0.7);line-height:1.85;max-width:520px;margin-bottom:44px;font-weight:300;}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:var(--dark);padding:14px 34px;border-radius:3px;font-weight:700;font-size:0.88rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .25s;box-shadow:0 0 0 0 rgba(245,166,35,0.4);}
+.btn-gold:hover{background:#e8940f;box-shadow:0 0 0 8px rgba(245,166,35,0.15);transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--white);padding:13px 34px;border:1px solid rgba(255,255,255,0.3);border-radius:3px;font-weight:500;font-size:0.88rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .25s;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+/* scroll indicator */
+.scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;}
+.scroll-indicator span{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.scroll-mouse{width:22px;height:34px;border:1px solid rgba(255,255,255,0.3);border-radius:12px;display:flex;justify-content:center;padding-top:5px;}
+.scroll-dot{width:3px;height:7px;background:var(--gold);border-radius:3px;animation:scrollDot 1.8s ease-in-out infinite;}
 
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
-    .about-img{border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.16);aspect-ratio:4/3;position:relative;}
-    .about-img img{width:100%;height:100%;object-fit:cover;display:block;}
-    .about-img-badge{position:absolute;bottom:20px;left:20px;background:var(--green-deep);color:white;padding:10px 18px;border-radius:12px;font-size:0.8rem;font-weight:600;}
-    .about-img-badge strong{display:block;font-size:1.1rem;color:var(--amber);}
-    .cert-badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px;}
-    .cert{background:var(--green-pale);color:var(--green-deep);padding:5px 13px;border-radius:8px;font-size:0.77rem;font-weight:600;border:1px solid #c8e8d3;}
-    .founder-quote{margin-top:26px;padding:20px 24px;background:var(--green-deep);border-radius:14px;color:white;font-style:italic;font-size:0.93rem;line-height:1.68;position:relative;}
-    .founder-quote::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:rgba(245,166,35,0.22);position:absolute;top:-10px;left:14px;line-height:1;}
-    .founder-sig{margin-top:10px;font-style:normal;font-weight:600;color:var(--amber);font-size:0.84rem;}
+/* MARQUEE STRIP */
+.marquee-strip{background:var(--gold);padding:14px 0;overflow:hidden;position:relative;}
+.marquee-track{display:flex;gap:0;animation:marquee 30s linear infinite;width:max-content;}
+.marquee-item{white-space:nowrap;font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark);padding:0 28px;}
+.marquee-item::before{content:'✦';margin-right:28px;color:rgba(0,0,0,0.3);}
 
-    .projects-section{background:var(--green-deep);padding:86px 6%;}
-    .projects-section .section-title{color:white;}
-    .projects-section .section-sub{color:rgba(255,255,255,0.65);}
-    .projects-section .section-tag{background:rgba(245,166,35,0.2);color:var(--amber);}
-    .projects-header{text-align:center;margin-bottom:52px;}
-    .projects-header .section-sub{margin:0 auto;}
-    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-    .project-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:18px;overflow:hidden;transition:transform .3s,background .3s;}
-    .project-card:hover{transform:translateY(-6px);background:rgba(255,255,255,0.1);}
-    .project-card-img{height:195px;overflow:hidden;}
-    .project-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
-    .project-card:hover .project-card-img img{transform:scale(1.06);}
-    .project-card-body{padding:22px;}
-    .project-icon{font-size:1.8rem;margin-bottom:10px;display:block;}
-    .project-name{font-family:'Playfair Display',serif;font-size:1.2rem;color:white;font-weight:700;margin-bottom:7px;}
-    .project-desc{font-size:0.86rem;color:rgba(255,255,255,0.65);line-height:1.65;}
-    .project-tag{display:inline-block;margin-top:12px;background:rgba(245,166,35,0.2);color:var(--amber);font-size:0.71rem;font-weight:700;letter-spacing:0.8px;padding:4px 12px;border-radius:50px;}
+/* STATS */
+.stats-bar{background:var(--g1);display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-cell{padding:36px 24px;text-align:center;border-right:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden;}
+.stat-cell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,166,35,0.04),transparent);opacity:0;transition:opacity .3s;}
+.stat-cell:hover::before{opacity:1;}
+.stat-cell:last-child{border-right:none;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-lbl{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;}
 
-    .impact-section{padding:86px 6%;}
-    .impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
-    .impact-visual{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-    .impact-card{background:var(--white);border-radius:16px;padding:26px 22px;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,0.07);border:1px solid #e8f0ea;transition:transform .2s;}
-    .impact-card:hover{transform:translateY(-4px);}
-    .impact-card:first-child{grid-column:span 2;background:var(--green-deep);color:white;}
-    .impact-icon{font-size:2rem;margin-bottom:9px;}
-    .impact-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:var(--green-mid);}
-    .impact-card:first-child .impact-num{color:var(--amber);}
-    .impact-card:first-child .impact-lbl{color:rgba(255,255,255,0.75);}
-    .impact-lbl{font-size:0.8rem;color:var(--muted);font-weight:500;margin-top:4px;}
-    .impact-list{list-style:none;margin-top:22px;}
-    .impact-list li{padding:12px 0;border-bottom:1px solid #e8f0ea;display:flex;align-items:flex-start;gap:11px;font-size:0.93rem;line-height:1.6;}
-    .impact-list li:last-child{border-bottom:none;}
-    .impact-list li::before{content:'✓';font-weight:700;color:var(--green-mid);flex-shrink:0;font-size:0.95rem;margin-top:1px;}
+/* SECTION COMMONS */
+.section{padding:100px 7%;}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--g4);margin-bottom:18px;}
+.tag::before{content:'';width:24px;height:1px;background:var(--g4);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;line-height:1.1;margin-bottom:20px;color:var(--dark);letter-spacing:-0.5px;}
+.sec-title em{color:var(--g4);font-style:normal;}
+.sec-sub{font-size:1rem;color:var(--muted);line-height:1.85;max-width:520px;font-weight:300;}
 
-    .gallery-section{background:var(--green-pale);padding:86px 6%;}
-    .gallery-header{text-align:center;margin-bottom:44px;}
-    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:12px;}
-    .gallery-item{border-radius:13px;overflow:hidden;position:relative;cursor:pointer;}
-    .gallery-item.wide{grid-column:span 2;}
-    .gallery-item.tall{grid-row:span 2;}
-    .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease;}
-    .gallery-item:hover img{transform:scale(1.07);}
-    .gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,77,46,0.75) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:12px;}
-    .gallery-item:hover .overlay{opacity:1;}
-    .overlay-label{color:white;font-size:0.75rem;font-weight:700;letter-spacing:0.5px;background:rgba(0,0,0,0.3);padding:3px 10px;border-radius:20px;}
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-visual{position:relative;}
+.about-img-main{border-radius:4px;overflow:hidden;aspect-ratio:3/4;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.18);}
+.about-img-main img{width:100%;height:100%;object-fit:cover;display:block;}
+.about-img-accent{position:absolute;bottom:-24px;right:-24px;width:55%;aspect-ratio:1;border-radius:4px;overflow:hidden;border:4px solid var(--cream);box-shadow:0 16px 40px rgba(0,0,0,0.15);}
+.about-img-accent img{width:100%;height:100%;object-fit:cover;display:block;}
+.about-year-badge{position:absolute;top:24px;left:-20px;background:var(--g1);color:var(--white);padding:16px 20px;border-radius:4px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+.about-year-badge .yr{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1;}
+.about-year-badge .lbl{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:4px;}
+.certifications{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;}
+.cert-pill{background:rgba(22,61,34,0.08);color:var(--g3);border:1px solid rgba(22,61,34,0.2);padding:5px 14px;border-radius:2px;font-size:0.72rem;font-weight:600;letter-spacing:0.5px;}
+.quote-block{margin-top:32px;padding:28px 32px;background:var(--g1);border-left:3px solid var(--gold);position:relative;overflow:hidden;}
+.quote-block::after{content:'"';font-family:'Cormorant Garamond',serif;font-size:10rem;color:rgba(245,166,35,0.07);position:absolute;top:-20px;right:16px;line-height:1;}
+.quote-block p{color:rgba(255,255,255,0.75);font-size:0.95rem;line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.05rem;}
+.quote-sig{margin-top:14px;font-size:0.78rem;color:var(--gold);font-weight:600;letter-spacing:1px;font-family:'Outfit',sans-serif;font-style:normal;}
 
-    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:999;align-items:center;justify-content:center;}
-    .lightbox.active{display:flex;}
-    .lightbox img{max-width:88vw;max-height:86vh;border-radius:12px;object-fit:contain;}
-    .lb-close{position:absolute;top:22px;right:28px;color:white;font-size:2.4rem;cursor:pointer;background:none;border:none;line-height:1;}
-    .lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.14);border:none;color:white;font-size:1.9rem;padding:10px 16px;border-radius:8px;cursor:pointer;transition:background .2s;}
-    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,0.28);}
-    .lb-prev{left:22px;}.lb-next{right:22px;}
+/* PROJECTS */
+.projects-dark{background:var(--g1);padding:100px 7%;}
+.projects-dark .tag{color:var(--gold);}
+.projects-dark .tag::before{background:var(--gold);}
+.projects-dark .sec-title{color:var(--white);}
+.projects-dark .sec-sub{color:rgba(255,255,255,0.5);}
+.proj-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px;}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.proj-card{position:relative;aspect-ratio:4/5;overflow:hidden;cursor:pointer;group:true;}
+.proj-card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
+.proj-card:hover .proj-card-img{transform:scale(1.08);}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,18,9,0.95) 0%,rgba(4,18,9,0.4) 50%,rgba(4,18,9,0.1) 100%);transition:opacity .3s;}
+.proj-card:hover .proj-overlay{opacity:0.85;}
+.proj-info{position:absolute;bottom:0;left:0;right:0;padding:28px 24px;transform:translateY(8px);transition:transform .3s;}
+.proj-card:hover .proj-info{transform:translateY(0);}
+.proj-tag{font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px;}
+.proj-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:white;margin-bottom:8px;}
+.proj-desc{font-size:0.82rem;color:rgba(255,255,255,0.65);line-height:1.65;max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.proj-card:hover .proj-desc{max-height:80px;}
+.proj-arrow{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-top:10px;opacity:0;transform:translateX(-8px);transition:all .3s .1s;}
+.proj-card:hover .proj-arrow{opacity:1;transform:translateX(0);}
 
-    .join-section{padding:96px 6%;background:linear-gradient(135deg,var(--green-deep) 0%,#0d3320 100%);text-align:center;position:relative;overflow:hidden;}
-    .join-section::before{content:'AMIGOS';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:18vw;font-weight:900;color:rgba(255,255,255,0.03);white-space:nowrap;pointer-events:none;}
-    .join-section .section-title{color:white;margin-bottom:14px;}
-    .join-section>p{color:rgba(255,255,255,0.7);font-size:1.03rem;max-width:520px;margin:0 auto 38px;line-height:1.75;}
-    .join-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-    .btn-white{background:white;color:var(--green-deep);padding:13px 30px;border-radius:50px;font-weight:700;font-size:0.93rem;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
-    .btn-white:hover{transform:translateY(-2px);}
-    .join-ways{display:flex;gap:20px;justify-content:center;margin-top:52px;flex-wrap:wrap;}
-    .join-way{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:26px 28px;text-align:center;min-width:170px;}
-    .join-way-icon{font-size:1.9rem;margin-bottom:9px;}
-    .join-way h4{color:white;font-size:0.95rem;font-weight:600;margin-bottom:5px;}
-    .join-way p{color:rgba(255,255,255,0.52);font-size:0.8rem;margin:0;max-width:135px;}
+/* IMPACT */
+.impact-section{padding:100px 7%;background:var(--cream);}
+.impact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.impact-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.imp-card{padding:28px;border:1px solid rgba(22,61,34,0.12);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;background:white;}
+.imp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.imp-card:hover::before{transform:scaleX(1);}
+.imp-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08);}
+.imp-card.featured{grid-column:span 2;background:var(--g1);border-color:transparent;}
+.imp-card.featured .imp-num{color:var(--gold);}
+.imp-card.featured .imp-lbl{color:rgba(255,255,255,0.5);}
+.imp-icon{font-size:2rem;margin-bottom:12px;}
+.imp-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--g4);line-height:1;}
+.imp-lbl{font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+.impact-list{list-style:none;margin-top:28px;}
+.impact-list li{padding:15px 0;border-bottom:1px solid rgba(22,61,34,0.1);display:flex;gap:14px;font-size:0.93rem;line-height:1.65;color:var(--text);}
+.impact-list li:last-child{border-bottom:none;}
+.impact-list li .check{color:var(--g4);font-size:1rem;margin-top:1px;flex-shrink:0;}
 
-    footer{background:var(--dark);padding:46px 6% 26px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px;}
-    .footer-brand .nav-logo{font-size:1.5rem;margin-bottom:10px;display:block;}
-    .footer-brand p{color:rgba(255,255,255,0.42);font-size:0.84rem;line-height:1.7;max-width:300px;margin-bottom:18px;}
-    .social-links{display:flex;gap:10px;}
-    .social-links a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);font-size:0.8rem;text-decoration:none;transition:all .2s;font-weight:700;}
-    .social-links a:hover{background:var(--amber);color:var(--dark);}
-    .footer-col h5{color:white;font-size:0.88rem;font-weight:700;margin-bottom:14px;}
-    .footer-col ul{list-style:none;}
-    .footer-col ul li{margin-bottom:9px;}
-    .footer-col ul a{color:rgba(255,255,255,0.42);text-decoration:none;font-size:0.84rem;transition:color .2s;}
-    .footer-col ul a:hover{color:var(--amber);}
-    .footer-bottom{background:var(--dark);padding:16px 6%;border-top:1px solid rgba(255,255,255,0.07);text-align:center;font-size:0.78rem;color:rgba(255,255,255,0.28);}
-    .footer-bottom a{color:var(--amber);text-decoration:none;}
+/* GALLERY */
+.gallery-section{background:var(--g1);padding:100px 7%;}
+.gallery-section .tag{color:var(--gold);}
+.gallery-section .tag::before{background:var(--gold);}
+.gallery-section .sec-title{color:white;}
+.gal-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;}
+.gal-count{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:700;color:rgba(245,166,35,0.15);line-height:1;}
+.gallery-masonry{columns:4;gap:10px;}
+.gal-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;border-radius:3px;cursor:pointer;}
+.gal-item img{width:100%;display:block;transition:transform .5s ease;}
+.gal-item:hover img{transform:scale(1.06);}
+.gal-item-overlay{position:absolute;inset:0;background:rgba(4,18,9,0.6);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:14px;}
+.gal-item:hover .gal-item-overlay{opacity:1;}
+.gal-lbl{color:white;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:rgba(245,166,35,0.3);padding:3px 10px;border-radius:2px;}
 
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
-    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
-    .reveal.visible{opacity:1;transform:translateY(0);}
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:2000;align-items:center;justify-content:center;}
+.lightbox.active{display:flex;}
+.lb-img-wrap{max-width:85vw;max-height:88vh;position:relative;}
+.lb-img-wrap img{max-width:100%;max-height:88vh;object-fit:contain;border-radius:3px;}
+.lb-close{position:absolute;top:-42px;right:0;background:none;border:none;color:white;font-size:1.8rem;cursor:pointer;opacity:0.7;transition:opacity .2s;}
+.lb-close:hover{opacity:1;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:white;font-size:1.6rem;padding:12px 16px;cursor:pointer;transition:background .2s;border-radius:3px;}
+.lb-nav:hover{background:rgba(255,255,255,0.2);}
+.lb-prev{left:-68px;}.lb-next{right:-68px;}
 
-    @media(max-width:900px){.about-grid,.impact-grid{grid-template-columns:1fr;}.projects-grid{grid-template-columns:1fr 1fr;}footer{grid-template-columns:1fr 1fr;}.stats-strip{grid-template-columns:repeat(2,1fr);}.stat-item:nth-child(2){border-right:none;}.gallery-grid{grid-template-columns:repeat(2,1fr);}}
-    @media(max-width:600px){.projects-grid{grid-template-columns:1fr;}footer{grid-template-columns:1fr;}.nav-links{display:none;}.gallery-grid{grid-template-columns:1fr 1fr;}}
-  </style>
+/* JOIN / CTA */
+.cta-section{position:relative;overflow:hidden;padding:120px 7%;text-align:center;background:var(--g2);}
+.cta-bg-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22vw;font-weight:700;color:rgba(255,255,255,0.02);pointer-events:none;white-space:nowrap;letter-spacing:-5px;}
+.cta-section .tag{justify-content:center;}
+.cta-section .tag::before{display:none;}
+.cta-section .tag::after{content:'';width:24px;height:1px;background:var(--gold);}
+.cta-section .sec-title{color:white;margin:0 auto 20px;}
+.cta-section .sec-sub{margin:0 auto 50px;color:rgba(255,255,255,0.55);}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.join-cards{display:flex;gap:20px;justify-content:center;margin-top:60px;flex-wrap:wrap;}
+.join-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:32px 28px;text-align:center;min-width:160px;transition:all .3s;border-radius:3px;}
+.join-card:hover{background:rgba(255,255,255,0.08);border-color:rgba(245,166,35,0.3);transform:translateY(-4px);}
+.join-card .ji{font-size:2.2rem;margin-bottom:12px;}
+.join-card h4{color:white;font-size:0.9rem;font-weight:600;margin-bottom:6px;letter-spacing:0.5px;}
+.join-card p{color:rgba(255,255,255,0.45);font-size:0.78rem;max-width:130px;line-height:1.5;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:70px 7% 30px;display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:60px;}
+.ft-brand .nav-logo{font-size:2rem;display:block;margin-bottom:16px;}
+.ft-brand p{color:rgba(255,255,255,0.38);font-size:0.85rem;line-height:1.75;max-width:320px;margin-bottom:24px;}
+.socials{display:flex;gap:10px;}
+.socials a{width:38px;height:38px;border:1px solid rgba(255,255,255,0.1);border-radius:3px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;font-weight:700;transition:all .2s;}
+.socials a:hover{border-color:var(--gold);color:var(--gold);}
+.ft-col h5{color:white;font-size:0.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:20px;}
+.ft-col ul{list-style:none;}
+.ft-col ul li{margin-bottom:11px;}
+.ft-col ul a{color:rgba(255,255,255,0.38);text-decoration:none;font-size:0.85rem;transition:color .2s;}
+.ft-col ul a:hover{color:var(--gold);}
+.ft-bottom{background:var(--dark);padding:20px 7%;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:rgba(255,255,255,0.25);}
+.ft-bottom a{color:var(--gold);text-decoration:none;}
+.ft-hashtag{color:var(--gold);font-weight:700;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes scrollDot{0%,100%{transform:translateY(0);opacity:1;}60%{transform:translateY(12px);opacity:0;}}
+@keyframes underlineIn{to{transform:scaleX(1);}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .75s ease,transform .75s ease;}
+.reveal-left.vis{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .75s ease,transform .75s ease;}
+.reveal-right.vis{opacity:1;transform:translateX(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){.about-wrap,.impact-layout,.proj-header{grid-template-columns:1fr;}.projects-grid{grid-template-columns:1fr 1fr;}.stats-bar{grid-template-columns:1fr 1fr;}.gallery-masonry{columns:3;}footer{grid-template-columns:1fr 1fr;}.ft-brand{grid-column:span 2;}.lb-prev{left:-20px;}.lb-next{right:-20px;}}
+@media(max-width:600px){.nav-links{display:none;}.projects-grid{grid-template-columns:1fr;}.gallery-masonry{columns:2;}footer{grid-template-columns:1fr;}.ft-brand{grid-column:unset;}.stats-bar{grid-template-columns:1fr 1fr;}.ft-bottom{flex-direction:column;gap:8px;text-align:center;}}
+</style>
 </head>
 <body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-<nav>
-  <div class="nav-logo">In<span>Amigos</span></div>
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">In<em>Amigos</em></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -158,206 +246,386 @@
   </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-overlay"></div>
+  <div class="hero-bg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800">
+  <defs>
+    <linearGradient id="nightsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#020c06"/>
+      <stop offset="60%" stop-color="#0a2a15"/>
+      <stop offset="100%" stop-color="#163d22"/>
+    </linearGradient>
+    <radialGradient id="moonGlow" cx="75%" cy="18%">
+      <stop offset="0%" stop-color="#f5e6a0" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#f5a623" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="fireGlow" cx="50%" cy="70%">
+      <stop offset="0%" stop-color="#f5a623" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="blur2"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+  <rect width="1400" height="800" fill="url(#nightsky)"/>
+  <rect width="1400" height="800" fill="url(#moonGlow)"/>
+  <!-- stars -->
+  <g fill="white">
+    <circle cx="80" cy="60" r="1.2" opacity="0.9"/><circle cx="200" cy="40" r="0.8" opacity="0.7"/>
+    <circle cx="350" cy="80" r="1.5" opacity="0.8"/><circle cx="500" cy="30" r="1" opacity="0.9"/>
+    <circle cx="650" cy="65" r="0.9" opacity="0.6"/><circle cx="780" cy="25" r="1.3" opacity="0.8"/>
+    <circle cx="920" cy="55" r="1" opacity="0.7"/><circle cx="1050" cy="35" r="1.4" opacity="0.9"/>
+    <circle cx="1180" cy="70" r="0.8" opacity="0.6"/><circle cx="1300" cy="45" r="1.2" opacity="0.8"/>
+    <circle cx="130" cy="120" r="0.7" opacity="0.5"/><circle cx="430" cy="145" r="1" opacity="0.6"/>
+    <circle cx="700" cy="110" r="0.8" opacity="0.7"/><circle cx="1000" cy="125" r="1.1" opacity="0.5"/>
+    <circle cx="1250" cy="100" r="0.9" opacity="0.7"/><circle cx="55" cy="170" r="1" opacity="0.4"/>
+    <circle cx="870" cy="155" r="0.7" opacity="0.6"/><circle cx="1350" cy="140" r="1" opacity="0.5"/>
+  </g>
+  <!-- moon -->
+  <circle cx="1050" cy="140" r="55" fill="#f5e6a0" opacity="0.18" filter="url(#blur6)"/>
+  <circle cx="1050" cy="140" r="38" fill="#f5e6a0" opacity="0.22"/>
+  <circle cx="1062" cy="128" r="32" fill="#0a2215" opacity="0.35"/>
+  <!-- distant mountains -->
+  <polygon points="0,420 120,250 240,380 380,200 520,340 650,180 800,310 950,160 1100,290 1250,170 1400,280 1400,800 0,800" fill="#0a2215" opacity="0.8"/>
+  <polygon points="0,480 150,320 300,430 450,280 600,390 750,240 900,360 1050,220 1200,330 1350,200 1400,270 1400,800 0,800" fill="#0d2a1a" opacity="0.9"/>
+  <!-- ground -->
+  <rect x="0" y="620" width="1400" height="180" fill="#061208"/>
+  <ellipse cx="700" cy="620" rx="750" ry="40" fill="#0a1f0e"/>
+  <!-- campfire -->
+  <ellipse cx="700" cy="660" rx="60" ry="12" fill="#1a0a00" opacity="0.8"/>
+  <rect width="1400" height="800" fill="url(#fireGlow)"/>
+  <!-- fire flames -->
+  <g opacity="0.9">
+    <ellipse cx="700" cy="638" rx="18" ry="30" fill="#f5a623"/>
+    <ellipse cx="690" cy="632" rx="12" ry="22" fill="#ff6b35"/>
+    <ellipse cx="712" cy="630" rx="10" ry="20" fill="#ff6b35"/>
+    <ellipse cx="700" cy="625" rx="8" ry="16" fill="#fff0a0"/>
+    <ellipse cx="695" cy="648" rx="22" ry="14" fill="#e8940f" opacity="0.7"/>
+  </g>
+  <!-- logs -->
+  <ellipse cx="680" cy="662" rx="30" ry="7" fill="#3d1a00" transform="rotate(-15 680 662)"/>
+  <ellipse cx="720" cy="662" rx="30" ry="7" fill="#3d1a00" transform="rotate(15 720 662)"/>
+  <!-- people sitting around fire - silhouettes -->
+  <!-- left group -->
+  <g fill="#040d06">
+    <circle cx="520" cy="580" r="26"/><path d="M494 606 Q520 670 546 606 Q538 620 520 625 Q502 620 494 606Z"/>
+    <circle cx="440" cy="595" r="22"/><path d="M418 617 Q440 675 462 617 Q455 630 440 635 Q425 630 418 617Z"/>
+    <circle cx="580" cy="590" r="24"/><path d="M556 614 Q580 672 604 614"/>
+    <!-- right group -->
+    <circle cx="880" cy="580" r="26"/><path d="M854 606 Q880 670 906 606"/>
+    <circle cx="960" cy="595" r="22"/><path d="M938 617 Q960 675 982 617"/>
+    <circle cx="820" cy="590" r="24"/><path d="M796 614 Q820 672 844 614"/>
+    <!-- back group -->
+    <circle cx="650" cy="550" r="20"/><path d="M630 570 Q650 620 670 570"/>
+    <circle cx="750" cy="548" r="20"/><path d="M730 568 Q750 618 770 568"/>
+  </g>
+  <!-- fire light on faces (warm glow dots) -->
+  <g fill="#f5a623" opacity="0.12" filter="url(#blur2)">
+    <circle cx="520" cy="585" r="18"/>
+    <circle cx="880" cy="585" r="18"/>
+    <circle cx="440" cy="598" r="14"/>
+    <circle cx="960" cy="598" r="14"/>
+  </g>
+  <!-- raised hands / interaction -->
+  <g stroke="#f5a623" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round">
+    <line x1="520" y1="580" x2="495" y2="540"/>
+    <line x1="880" y1="580" x2="905" y2="540"/>
+    <line x1="650" y1="550" x2="635" y2="515"/>
+  </g>
+  <!-- banner between trees -->
+  <line x1="180" y1="350" x2="400" y2="420" stroke="#1a4d2e" stroke-width="3"/>
+  <rect x="200" y="355" width="180" height="55" rx="5" fill="#1a4d2e" opacity="0.9" transform="rotate(-8 200 355)"/>
+  <text x="292" y="387" fill="#f5a623" text-anchor="middle" font-size="13" font-family="Georgia" font-weight="bold" transform="rotate(-8 292 387)">#InAmigos</text>
+  <!-- trees left -->
+  <rect x="160" y="300" width="22" height="220" fill="#1a0e00"/>
+  <circle cx="171" cy="270" r="65" fill="#0d2a12"/>
+  <circle cx="140" cy="300" r="45" fill="#0f3016"/>
+  <circle cx="202" cy="295" r="42" fill="#0f3016"/>
+  <!-- trees right -->
+  <rect x="1220" y="290" width="22" height="230" fill="#1a0e00"/>
+  <circle cx="1231" cy="258" r="68" fill="#0d2a12"/>
+  <circle cx="1200" cy="290" r="48" fill="#0f3016"/>
+  <circle cx="1262" cy="285" r="44" fill="#0f3016"/>
+</svg>  </div>
+  <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-badge">&#9679; Registered NGO &middot; Chhattisgarh, India</div>
-    <h1>Uniting Minds<br/>for a <em>Better</em> World</h1>
-    <p>InAmigos Foundation is a Section 8 non-profit dedicated to creating lasting change through education, food distribution, women empowerment, animal welfare, and environmental sustainability.</p>
-    <div class="hero-btns">
-      <a href="#join" class="btn-primary">Become a Volunteer</a>
-      <a href="#projects" class="btn-outline">Our Projects &darr;</a>
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Registered NGO &middot; Section 8 &middot; Chhattisgarh</span>
     </div>
+    <h1>
+      Uniting Minds,
+      <span class="line2">Changing <span class="word-highlight">Lives.</span></span>
+    </h1>
+    <p class="hero-desc">InAmigos Foundation is a Section 8 non-profit creating lasting impact through education, food distribution, women empowerment, animal welfare, and sustainability — across 28 states of India.</p>
+    <div class="hero-actions">
+      <a href="#join" class="btn-gold">Volunteer Now</a>
+      <a href="#projects" class="btn-ghost">Explore Projects</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    <span>Scroll</span>
   </div>
 </section>
 
-<div class="stats-strip">
-  <div class="stat-item"><div class="stat-num">50,000+</div><div class="stat-label">Beneficiaries Reached</div></div>
-  <div class="stat-item"><div class="stat-num">200+</div><div class="stat-label">Active Volunteers</div></div>
-  <div class="stat-item"><div class="stat-num">28</div><div class="stat-label">States Covered</div></div>
-  <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Core Projects</div></div>
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Project Seva</span>
+    <span class="marquee-item">BachpanSala</span>
+    <span class="marquee-item">Project Udaan</span>
+    <span class="marquee-item">Project Jeev</span>
+    <span class="marquee-item">Project Prakriti</span>
+    <span class="marquee-item">Project Vikas</span>
+    <span class="marquee-item">50,000+ Lives</span>
+    <span class="marquee-item">200+ Volunteers</span>
+    <span class="marquee-item">28 States</span>
+    <span class="marquee-item">Since 2020</span>
+    <span class="marquee-item">Project Seva</span>
+    <span class="marquee-item">BachpanSala</span>
+    <span class="marquee-item">Project Udaan</span>
+    <span class="marquee-item">Project Jeev</span>
+    <span class="marquee-item">Project Prakriti</span>
+    <span class="marquee-item">Project Vikas</span>
+    <span class="marquee-item">50,000+ Lives</span>
+    <span class="marquee-item">200+ Volunteers</span>
+    <span class="marquee-item">28 States</span>
+    <span class="marquee-item">Since 2020</span>
+  </div>
 </div>
 
-<section class="section" id="about">
-  <div class="about-grid">
-    <div class="about-img reveal">
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-cell reveal"><div class="stat-num" data-val="50000">0</div><div class="stat-lbl">Beneficiaries Reached</div></div>
+  <div class="stat-cell reveal"><div class="stat-num" data-val="200">0</div><div class="stat-lbl">Active Volunteers</div></div>
+  <div class="stat-cell reveal"><div class="stat-num" data-val="28">0</div><div class="stat-lbl">States Covered</div></div>
+  <div class="stat-cell reveal"><div class="stat-num" data-val="6">0</div><div class="stat-lbl">Core Projects</div></div>
+</div>
 
-        <img 
-            src="community.jpg" 
-            alt="InAmigos Foundation community work" 
-        />
-    
-        <div class="about-img-badge">
-            <strong>Since 2020</strong>
-            Serving Communities
-        </div>
-    
-    </div>
-    
-    <div class="reveal">
-        <div class="section-tag">Who We Are</div>
-      <h2 class="section-title">One Foundation, <span>Countless Lives</span> Changed</h2>
-      <p class="section-sub">InAmigos Foundation was founded on September 23, 2020 by Mr. Govind Shukla. Licensed by the Central Government under Section 8 of the Companies Act 2013, we operate across India from our base in Bilaspur, Chhattisgarh.</p>
-      <div class="cert-badges">
-        <span class="cert">Section 8 Licensed</span>
-        <span class="cert">80G &amp; 12A Certified</span>
-        <span class="cert">ISO 9001:2015</span>
-        <span class="cert">NGO Darpan &ndash; NITI Aayog</span>
-        <span class="cert">CSR-1 Registered</span>
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-wrap">
+    <div class="about-visual reveal-left">
+      <div class="about-img-main">
+        <img src="community.jpg" alt="InAmigos Community"/>
       </div>
-      <div class="founder-quote">
-        My vision is to unite driven individuals to create lasting, positive change in society. Every effort I make is a step toward building a more inclusive and brighter future for everyone.
-        <div class="founder-sig">&mdash; Mr. Govind Shukla, Founder &amp; CEO</div>
+      <div class="about-img-accent">
+        <img src="InAmigos_Volunteers.png" alt="Volunteer activity"/>
+      </div>
+      <div class="about-year-badge">
+        <div class="yr">2020</div>
+        <div class="lbl">Founded</div>
+      </div>
+    </div>
+    <div class="reveal-right">
+      <div class="tag">Who We Are</div>
+      <h2 class="sec-title">One Foundation,<br/><em>Countless Lives</em> Changed</h2>
+      <p class="sec-sub">Founded on September 23, 2020 by Mr. Govind Shukla, InAmigos Foundation operates across India from Bilaspur, Chhattisgarh — a youth-powered movement dedicated to lasting, measurable social change.</p>
+      <div class="certifications">
+        <span class="cert-pill">Section 8 Licensed</span>
+        <span class="cert-pill">80G &amp; 12A Certified</span>
+        <span class="cert-pill">ISO 9001:2015</span>
+        <span class="cert-pill">NGO Darpan &ndash; NITI Aayog</span>
+        <span class="cert-pill">CSR-1 Registered</span>
+      </div>
+      <div class="quote-block">
+        <p>My vision is to unite driven individuals to create lasting, positive change. Every step I take is toward building a more inclusive and brighter future for everyone.</p>
+        <div class="quote-sig">&mdash; Mr. Govind Shukla, Founder &amp; CEO</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="projects-section" id="projects">
-  <div class="projects-header reveal">
-    <div class="section-tag">Our Work</div>
-    <h2 class="section-title">Six Projects. <span style="color:var(--amber)">One Mission.</span></h2>
-    <p class="section-sub">Each initiative addresses a critical gap in society &mdash; from hunger and illiteracy to animal suffering and environmental damage.</p>
+<!-- PROJECTS -->
+<section class="projects-dark" id="projects">
+  <div class="proj-header">
+    <div class="reveal">
+      <div class="tag">Our Work</div>
+      <h2 class="sec-title" style="color:white">Six Projects.<br/><em style="color:var(--gold)">One Mission.</em></h2>
+    </div>
+    <div class="reveal" style="text-align:right">
+      <p class="sec-sub" style="margin-left:auto">Every initiative targets a real gap — hunger, illiteracy, inequality, suffering, environmental damage. Hover to explore.</p>
+    </div>
   </div>
   <div class="projects-grid">
-    <div class="project-card reveal">
-      <div class="project-card-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWE0ZDJlIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkN2E0ZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmcxKSIvPgogIDwhLS0gc2VydmluZyBib3dsIC0tPgogIDxlbGxpcHNlIGN4PSIzMDAiIGN5PSIyMjAiIHJ4PSIxMjAiIHJ5PSI0MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC45Ii8+CiAgPHBhdGggZD0iTTE4MCAyMjAgUTE4MCAzMDAgMzAwIDMwMCBRNDIwIDMwMCA0MjAgMjIwIiBmaWxsPSIjZTg5NDBmIiBvcGFjaXR5PSIwLjkiLz4KICA8IS0tIHN0ZWFtIC0tPgogIDxnIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC41Ij4KICAgIDxwYXRoIGQ9Ik0yNDAgMjAwIFEyNTAgMTc1IDI0MCAxNTAiLz4KICAgIDxwYXRoIGQ9Ik0zMDAgMTk1IFEzMTAgMTY4IDMwMCAxNDAiLz4KICAgIDxwYXRoIGQ9Ik0zNjAgMjAwIFEzNzAgMTczIDM2MCAxNDgiLz4KICA8L2c+CiAgPCEtLSBoYW5kcyBob2xkaW5nIC0tPgogIDxlbGxpcHNlIGN4PSIxODAiIGN5PSIyNDAiIHJ4PSI0MCIgcnk9IjE4IiBmaWxsPSIjYzg5NTZiIiBvcGFjaXR5PSIwLjgiLz4KICA8ZWxsaXBzZSBjeD0iNDIwIiBjeT0iMjQwIiByeD0iNDAiIHJ5PSIxOCIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44Ii8+CiAgPCEtLSBsYWJlbCAtLT4KICA8dGV4dCB4PSIzMDAiIHk9IjM1MCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhIiBmb250LXdlaWdodD0iYm9sZCI+UHJvamVjdCBTZXZhPC90ZXh0PgogIDx0ZXh0IHg9IjMwMCIgeT0iMzc1IiBmaWxsPSIjZjVhNjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LWZhbWlseT0iQXJpYWwiPkZvb2QgJmFtcDsgQ2xvdGhpbmcgRGlzdHJpYnV0aW9uPC90ZXh0PgogIDwhLS0gZGVjb3JhdGl2ZSBkb3RzIC0tPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjMwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4wNSIvPgogIDxjaXJjbGUgY3g9IjU1MCIgY3k9IjM1MCIgcj0iNTAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==" alt="Project Seva"/></div>
-      <div class="project-card-body">
-        <span class="project-icon">&#127857;</span>
-        <div class="project-name">Project Seva</div>
-        <p class="project-desc">Distributing nutritious meals and essential clothing to impoverished communities. Over 50,000+ meals served, ensuring no family goes hungry.</p>
-        <span class="project-tag">Food &amp; Clothing</span>
+    <div class="proj-card reveal">
+      <img class="proj-card-img" src="project_seva.png" alt="Project Seva"/>
+      <div class="proj-overlay"></div>
+      <div class="proj-info">
+        <div class="proj-tag">Food &amp; Clothing</div>
+        <div class="proj-name">Project Seva</div>
+        <p class="proj-desc">50,000+ meals and clothing distributed. Ensuring no family goes hungry or suffers in extreme weather — every day, every city.</p>
+        <div class="proj-arrow">Learn more &rarr;</div>
       </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-card-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWEzZDZiIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkNWE5ZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmcyKSIvPgogIDwhLS0gYmxhY2tib2FyZCAtLT4KICA8cmVjdCB4PSI4MCIgeT0iNjAiIHdpZHRoPSI0NDAiIGhlaWdodD0iMjAwIiByeD0iOCIgZmlsbD0iIzFhNWMyYSIvPgogIDxyZWN0IHg9IjkwIiB5PSI3MCIgd2lkdGg9IjQyMCIgaGVpZ2h0PSIxODAiIHJ4PSI0IiBmaWxsPSIjMWU2YjMwIi8+CiAgPCEtLSBjaGFsayB0ZXh0IG9uIGJvYXJkIC0tPgogIDx0ZXh0IHg9IjMwMCIgeT0iMTQwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyOCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIG9wYWNpdHk9IjAuOSI+QSBCIEMgRDwvdGV4dD4KICA8dGV4dCB4PSIzMDAiIHk9IjE4NSIgZmlsbD0iI2Y1YTYyMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBvcGFjaXR5PSIwLjgiPjEgKyAxID0gMjwvdGV4dD4KICA8bGluZSB4MT0iMTIwIiB5MT0iMjE1IiB4Mj0iNDgwIiB5Mj0iMjE1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMyIvPgogIDwhLS0gY2hhbGsgdHJheSAtLT4KICA8cmVjdCB4PSI4MCIgeT0iMjYwIiB3aWR0aD0iNDQwIiBoZWlnaHQ9IjEyIiByeD0iMyIgZmlsbD0iIzBkMzUyMCIvPgogIDwhLS0gc2l0dGluZyBjaGlsZHJlbiBzaWxob3VldHRlcyAtLT4KICA8ZyBmaWxsPSIjMGQyNTQ1IiBvcGFjaXR5PSIwLjgiPgogICAgPGNpcmNsZSBjeD0iMTYwIiBjeT0iMzMwIiByPSIxOCIvPgogICAgPGVsbGlwc2UgY3g9IjE2MCIgY3k9IjM3MCIgcng9IjIyIiByeT0iMjAiLz4KICAgIDxjaXJjbGUgY3g9IjI0MCIgY3k9IjMyNSIgcj0iMTgiLz4KICAgIDxlbGxpcHNlIGN4PSIyNDAiIGN5PSIzNjUiIHJ4PSIyMiIgcnk9IjIwIi8+CiAgICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIzMjgiIHI9IjE4Ii8+CiAgICA8ZWxsaXBzZSBjeD0iMzIwIiBjeT0iMzY4IiByeD0iMjIiIHJ5PSIyMCIvPgogICAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMzI2IiByPSIxOCIvPgogICAgPGVsbGlwc2UgY3g9IjQwMCIgY3k9IjM2NiIgcng9IjIyIiByeT0iMjAiLz4KICAgIDxjaXJjbGUgY3g9IjQ3MCIgY3k9IjMzMCIgcj0iMTYiLz4KICAgIDxlbGxpcHNlIGN4PSI0NzAiIGN5PSIzNjgiIHJ4PSIyMCIgcnk9IjE5Ii8+CiAgPC9nPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzk1IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsIiBvcGFjaXR5PSIwLjciPlByb2plY3QgQmFjaHBhblNhbGEg4oCUIEVkdWNhdGlvbiBmb3IgQWxsPC90ZXh0Pgo8L3N2Zz4=" alt="BachpanSala"/></div>
-      <div class="project-card-body">
-        <span class="project-icon">&#128218;</span>
-        <div class="project-name">Project BachpanSala</div>
-        <p class="project-desc">Nurturing young minds by providing quality education, digital literacy, and school supplies to underprivileged children across India.</p>
-        <span class="project-tag">Education</span>
+    <div class="proj-card reveal">
+      <img class="proj-card-img" src="bachpansala.png" alt="BachpanSala"/>
+      <div class="proj-overlay"></div>
+      <div class="proj-info">
+        <div class="proj-tag">Education</div>
+        <div class="proj-name">BachpanSala</div>
+        <p class="proj-desc">Quality education, digital literacy and school supplies for underprivileged children — breaking the cycle of poverty one lesson at a time.</p>
+        <div class="proj-arrow">Learn more &rarr;</div>
       </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-card-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNmIxYTRkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzllMmQ3YSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmczKSIvPgogIDwhLS0gcmlzaW5nIGZpZ3VyZSB3aXRoIGFybXMgdXAgLS0+CiAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMTYwIiByPSIzNSIgZmlsbD0iI2Y1YzhlMCIgb3BhY2l0eT0iMC45Ii8+CiAgPCEtLSBib2R5IC0tPgogIDxwYXRoIGQ9Ik0yNzAgMTk1IFEzMDAgMjgwIDMzMCAxOTUiIGZpbGw9IiNlODVjYTAiIG9wYWNpdHk9IjAuOCIvPgogIDwhLS0gYXJtcyByYWlzZWQgLS0+CiAgPGxpbmUgeDE9IjI3MCIgeTE9IjIxMCIgeDI9IjIxMCIgeTI9IjE2MCIgc3Ryb2tlPSIjZjVjOGUwIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIzMzAiIHkxPSIyMTAiIHgyPSIzOTAiIHkyPSIxNjAiIHN0cm9rZT0iI2Y1YzhlMCIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIGJpcmRzL3dpbmdzIC0tPgogIDxwYXRoIGQ9Ik0xODAgMTQwIFEyMjAgMTEwIDIxMCAxNjAiIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuNyIvPgogIDxwYXRoIGQ9Ik00MjAgMTQwIFEzODAgMTEwIDM5MCAxNjAiIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuNyIvPgogIDxwYXRoIGQ9Ik0xMjAgMTIwIFExNTUgOTUgMTQ4IDEzNSIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC41Ii8+CiAgPHBhdGggZD0iTTQ4MCAxMTggUTQ0NSA5MyA0NTIgMTMzIiBmaWxsPSIjZjVhNjIzIiBvcGFjaXR5PSIwLjUiLz4KICA8IS0tIHN0YXJzL3NwYXJrbGVzIC0tPgogIDxnIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuOCI+CiAgICA8Y2lyY2xlIGN4PSIxNTAiIGN5PSI4MCIgcj0iNSIvPgogICAgPGNpcmNsZSBjeD0iNDUwIiBjeT0iNzUiIHI9IjUiLz4KICAgIDxjaXJjbGUgY3g9IjMyMCIgY3k9IjYwIiByPSI0Ii8+CiAgICA8Y2lyY2xlIGN4PSI4MCIgY3k9IjIwMCIgcj0iNCIvPgogICAgPGNpcmNsZSBjeD0iNTIwIiBjeT0iMTkwIiByPSI0Ii8+CiAgPC9nPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzMwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIGZvbnQtd2VpZ2h0PSJib2xkIj5Qcm9qZWN0IFVkYWFuPC90ZXh0PgogIDx0ZXh0IHg9IjMwMCIgeT0iMzU4IiBmaWxsPSIjZjVjOGUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LWZhbWlseT0iQXJpYWwiPldvbWVuIEVtcG93ZXJtZW50PC90ZXh0Pgo8L3N2Zz4=" alt="Project Udaan"/></div>
-      <div class="project-card-body">
-        <span class="project-icon">&#128105;</span>
-        <div class="project-name">Project Udaan</div>
-        <p class="project-desc">Empowering 900+ women through skill development, vocational training, and financial independence via self-help groups in rural areas.</p>
-        <span class="project-tag">Women Empowerment</span>
+    <div class="proj-card reveal">
+      <img class="proj-card-img" src="project_udaan.png" alt="Project Udaan"/>
+      <div class="proj-overlay"></div>
+      <div class="proj-info">
+        <div class="proj-tag">Women Empowerment</div>
+        <div class="proj-name">Project Udaan</div>
+        <p class="proj-desc">900+ women empowered through vocational training, self-help groups, and pathways to financial independence across rural India.</p>
+        <div class="proj-arrow">Learn more &rarr;</div>
       </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-card-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnNCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjM2QyYTAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzdhNWEwMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmc0KSIvPgogIDwhLS0gZG9nIHNpbGhvdWV0dGUgLS0+CiAgPGVsbGlwc2UgY3g9IjI4MCIgY3k9IjI1MCIgcng9IjkwIiByeT0iNTUiIGZpbGw9IiNjODk1NmIiIG9wYWNpdHk9IjAuODUiLz4KICA8Y2lyY2xlIGN4PSIzNTAiIGN5PSIyMTUiIHI9IjQyIiBmaWxsPSIjYzg5NTZiIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPCEtLSBlYXJzIC0tPgogIDxlbGxpcHNlIGN4PSIzMzUiIGN5PSIxODUiIHJ4PSIxNSIgcnk9IjIyIiBmaWxsPSIjYjA3ODQwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTUgMzM1IDE4NSkiLz4KICA8ZWxsaXBzZSBjeD0iMzcyIiBjeT0iMTgyIiByeD0iMTQiIHJ5PSIyMSIgZmlsbD0iI2IwNzg0MCIgdHJhbnNmb3JtPSJyb3RhdGUoMTAgMzcyIDE4MikiLz4KICA8IS0tIGV5ZXMgLS0+CiAgPGNpcmNsZSBjeD0iMzQyIiBjeT0iMjEwIiByPSI2IiBmaWxsPSIjMmExODAwIi8+CiAgPGNpcmNsZSBjeD0iMzY1IiBjeT0iMjA4IiByPSI2IiBmaWxsPSIjMmExODAwIi8+CiAgPGNpcmNsZSBjeD0iMzQ0IiBjeT0iMjA4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjM2NyIgY3k9IjIwNiIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjM1NSIgY3k9IjIyNSIgcng9IjgiIHJ5PSI1IiBmaWxsPSIjMmExODAwIi8+CiAgPCEtLSB0YWlsIC0tPgogIDxwYXRoIGQ9Ik0xOTAgMjUwIFExNTAgMjIwIDE2MCAxOTAiIHN0cm9rZT0iI2M4OTU2YiIgc3Ryb2tlLXdpZHRoPSIxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPCEtLSBsZWdzIC0tPgogIDxyZWN0IHg9IjIyMCIgeT0iMjkwIiB3aWR0aD0iMTgiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjYjA3ODQwIi8+CiAgPHJlY3QgeD0iMjU1IiB5PSIyOTUiIHdpZHRoPSIxOCIgaGVpZ2h0PSIzOCIgcng9IjgiIGZpbGw9IiNiMDc4NDAiLz4KICA8cmVjdCB4PSIzMDAiIHk9IjI5MyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjM4IiByeD0iOCIgZmlsbD0iI2IwNzg0MCIvPgogIDxyZWN0IHg9IjMzNSIgeT0iMjkwIiB3aWR0aD0iMTgiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjYjA3ODQwIi8+CiAgPCEtLSBoYW5kIGZlZWRpbmcgLS0+CiAgPHBhdGggZD0iTTM4MCAyMzAgUTQzMCAyMTAgNDIwIDI2MCIgZmlsbD0iI2Q0YTg3YSIgb3BhY2l0eT0iMC44Ii8+CiAgPCEtLSBoZWFydCAtLT4KICA8cGF0aCBkPSJNNDYwIDEwMCBDNDYwIDg1IDQ0NSA3NSA0MzUgODUgQzQyNSA3NSA0MTAgODUgNDEwIDEwMCBDNDEwIDExNSA0MzUgMTM1IDQzNSAxMzUgQzQzNSAxMzUgNDYwIDExNSA0NjAgMTAwWiIgZmlsbD0iI2U4NWM1YyIgb3BhY2l0eT0iMC44Ii8+CiAgPHRleHQgeD0iMzAwIiB5PSIzNjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIyIiBmb250LWZhbWlseT0iR2VvcmdpYSIgZm9udC13ZWlnaHQ9ImJvbGQiPlByb2plY3QgSmVldjwvdGV4dD4KICA8dGV4dCB4PSIzMDAiIHk9IjM4NSIgZmlsbD0iI2Y1ZDA4YSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsIj5BbmltYWwgV2VsZmFyZSAmYW1wOyBQcm90ZWN0aW9uPC90ZXh0Pgo8L3N2Zz4=" alt="Project Jeev"/></div>
-      <div class="project-card-body">
-        <span class="project-icon">&#128062;</span>
-        <div class="project-name">Project Jeev</div>
-        <p class="project-desc">Rescuing and feeding 50+ stray animals daily. Engaging youth to spread compassion and build an inclusive, empathetic society.</p>
-        <span class="project-tag">Animal Welfare</span>
+    <div class="proj-card reveal">
+      <img class="proj-card-img" src="project_jeev.png" alt="Project Jeev"/>
+      <div class="proj-overlay"></div>
+      <div class="proj-info">
+        <div class="proj-tag">Animal Welfare</div>
+        <div class="proj-name">Project Jeev</div>
+        <p class="proj-desc">Feeding 50+ stray animals daily, rescue operations, and youth engagement to build a more compassionate, empathetic society.</p>
+        <div class="proj-arrow">Learn more &rarr;</div>
       </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-card-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnNSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWE2YjhhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhNGQyZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmc1KSIvPgogIDwhLS0gc3VuIC0tPgogIDxjaXJjbGUgY3g9IjUwMCIgY3k9IjgwIiByPSI1NSIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC43Ii8+CiAgPGcgc3Ryb2tlPSIjZjVhNjIzIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuNCI+CiAgICA8bGluZSB4MT0iNTAwIiB5MT0iMTAiIHgyPSI1MDAiIHkyPSIzMCIvPgogICAgPGxpbmUgeDE9IjUwMCIgeTE9IjEzMCIgeDI9IjUwMCIgeTI9IjE1MCIvPgogICAgPGxpbmUgeDE9IjQzMCIgeTE9IjgwIiB4Mj0iNDEwIiB5Mj0iODAiLz4KICAgIDxsaW5lIHgxPSI1NzAiIHkxPSI4MCIgeDI9IjU5MCIgeTI9IjgwIi8+CiAgICA8bGluZSB4MT0iNDUwIiB5MT0iMzAiIHgyPSI0MzgiIHkyPSI0MiIvPgogICAgPGxpbmUgeDE9IjU1MCIgeTE9IjEzMCIgeDI9IjU2MiIgeTI9IjExOCIvPgogIDwvZz4KICA8IS0tIGdyb3VuZCAtLT4KICA8ZWxsaXBzZSBjeD0iMzAwIiBjeT0iNDAwIiByeD0iMzUwIiByeT0iODAiIGZpbGw9IiMwYTMzMTgiLz4KICA8IS0tIGJpZyB0cmVlIGNlbnRlciAtLT4KICA8cmVjdCB4PSIyODUiIHk9IjIwMCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iIzVjM2ExZSIvPgogIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjE3MCIgcj0iNzAiIGZpbGw9IiMxYTZiMmUiLz4KICA8Y2lyY2xlIGN4PSIyNjAiIGN5PSIxOTUiIHI9IjQ1IiBmaWxsPSIjMWU3YTM1Ii8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMTk1IiByPSI0NSIgZmlsbD0iIzFlN2EzNSIvPgogIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjEzNSIgcj0iNTAiIGZpbGw9IiMyMjg4M2MiLz4KICA8IS0tIHNtYWxsIHRyZWVzIC0tPgogIDxyZWN0IHg9IjExNSIgeT0iMzAwIiB3aWR0aD0iMTgiIGhlaWdodD0iNzAiIGZpbGw9IiM1YzNhMWUiLz4KICA8Y2lyY2xlIGN4PSIxMjQiIGN5PSIyODAiIHI9IjM1IiBmaWxsPSIjMWE2YjJlIi8+CiAgPHJlY3QgeD0iNDY1IiB5PSIyOTUiIHdpZHRoPSIyMCIgaGVpZ2h0PSI3NSIgZmlsbD0iIzVjM2ExZSIvPgogIDxjaXJjbGUgY3g9IjQ3NSIgY3k9IjI3MiIgcj0iMzgiIGZpbGw9IiMxYTZiMmUiLz4KICA8IS0tIHNhcGxpbmcgYmVpbmcgcGxhbnRlZCAtLT4KICA8cmVjdCB4PSIxNTgiIHk9IjM0MCIgd2lkdGg9IjgiIGhlaWdodD0iMzUiIGZpbGw9IiM1YzNhMWUiLz4KICA8Y2lyY2xlIGN4PSIxNjIiIGN5PSIzMzAiIHI9IjE2IiBmaWxsPSIjMjI4ODNjIi8+CiAgPCEtLSBoYW5kcyBwbGFudGluZyAtLT4KICA8ZWxsaXBzZSBjeD0iMTQ1IiBjeT0iMzYwIiByeD0iMjIiIHJ5PSIxMCIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44IiB0cmFuc2Zvcm09InJvdGF0ZSgtMjAgMTQ1IDM2MCkiLz4KICA8ZWxsaXBzZSBjeD0iMTgwIiBjeT0iMzU4IiByeD0iMjIiIHJ5PSIxMCIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44IiB0cmFuc2Zvcm09InJvdGF0ZSgyMCAxODAgMzU4KSIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzkwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIGZvbnQtd2VpZ2h0PSJib2xkIj5Qcm9qZWN0IFByYWtyaXRpIOKAlCAyMCwwMDArIFRyZWVzIFBsYW50ZWQ8L3RleHQ+Cjwvc3ZnPg==" alt="Project Prakriti"/></div>
-      <div class="project-card-body">
-        <span class="project-icon">&#127807;</span>
-        <div class="project-name">Project Prakriti</div>
-        <p class="project-desc">Planting 20,000+ trees, organising clean-up campaigns and conservation workshops. Every tree is a gift to future generations.</p>
-        <span class="project-tag">Environment</span>
+    <div class="proj-card reveal">
+      <img class="proj-card-img" src="project_prakriti.png" alt="Project Prakriti"/>
+      <div class="proj-overlay"></div>
+      <div class="proj-info">
+        <div class="proj-tag">Environment</div>
+        <div class="proj-name">Project Prakriti</div>
+        <p class="proj-desc">20,000+ trees planted, clean-up drives, and conservation workshops. Protecting the planet for generations to come.</p>
+        <div class="proj-arrow">Learn more &rarr;</div>
       </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-card-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnNiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWEyZDRkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkNGE3YSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmc2KSIvPgogIDwhLS0gbGFwdG9wIC0tPgogIDxyZWN0IHg9IjE2MCIgeT0iMTQwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjE3NSIgcng9IjEyIiBmaWxsPSIjMmEzZDVjIi8+CiAgPHJlY3QgeD0iMTcwIiB5PSIxNTAiIHdpZHRoPSIyNjAiIGhlaWdodD0iMTU1IiByeD0iNiIgZmlsbD0iIzFhNWM4YSIvPgogIDwhLS0gc2NyZWVuIGNvbnRlbnQgLSBiYXIgY2hhcnQgLS0+CiAgPGc+CiAgICA8cmVjdCB4PSIxOTUiIHk9IjI0MCIgd2lkdGg9IjI1IiBoZWlnaHQ9IjUwIiBmaWxsPSIjNGNhZjcyIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxyZWN0IHg9IjIzMCIgeT0iMjIwIiB3aWR0aD0iMjUiIGhlaWdodD0iNzAiIGZpbGw9IiM0Y2FmNzIiIG9wYWNpdHk9IjAuOSIvPgogICAgPHJlY3QgeD0iMjY1IiB5PSIyMDAiIHdpZHRoPSIyNSIgaGVpZ2h0PSI5MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC45Ii8+CiAgICA8cmVjdCB4PSIzMDAiIHk9IjE4NSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjEwNSIgZmlsbD0iIzRjYWY3MiIvPgogICAgPHJlY3QgeD0iMzM1IiB5PSIxNzAiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNmNWE2MjMiLz4KICAgIDxyZWN0IHg9IjM3MCIgeT0iMTU1IiB3aWR0aD0iMjUiIGhlaWdodD0iMTM1IiBmaWxsPSIjNGNhZjcyIi8+CiAgICA8IS0tIHRyZW5kIGxpbmUgLS0+CiAgICA8cG9seWxpbmUgcG9pbnRzPSIyMDcsMjQwIDI0MiwyMTggMjc3LDE5OCAzMTIsMTgyIDM0NywxNjcgMzgyLDE1MiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjciLz4KICA8L2c+CiAgPCEtLSBsYXB0b3AgYmFzZSAtLT4KICA8cGF0aCBkPSJNMTMwIDMxNSBMMTcwIDMxNSBMMTYwIDMyNSBMNDQwIDMyNSBMNDMwIDMxNSBMNDcwIDMxNSBMNDkwIDMzNSBMMTEwIDMzNVoiIGZpbGw9IiMyYTNkNWMiLz4KICA8IS0tIGdyb3dpbmcgYXJyb3cgLS0+CiAgPHBhdGggZD0iTTQ5MCAxMDAgTDU0MCA2MCBMNTMwIDg1IEw1NjAgNzUgTDU0MCA2MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC44Ii8+CiAgPCEtLSBjZXJ0aWZpY2F0ZSBiYWRnZSAtLT4KICA8Y2lyY2xlIGN4PSI1MTAiIGN5PSIyODAiIHI9IjQ1IiBmaWxsPSIjMWE0ZDJlIiBzdHJva2U9IiNmNWE2MjMiIHN0cm9rZS13aWR0aD0iMyIvPgogIDx0ZXh0IHg9IjUxMCIgeT0iMjczIiBmaWxsPSIjZjVhNjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIj5TS0lMTDwvdGV4dD4KICA8dGV4dCB4PSI1MTAiIHk9IjI4OCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtZmFtaWx5PSJBcmlhbCI+Q0VSVElGSUVEPC90ZXh0PgogIDxjaXJjbGUgY3g9IjUxMCIgY3k9IjI4MCIgcj0iMzgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y1YTYyMyIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KICA8dGV4dCB4PSIzMDAiIHk9IjM2NSIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhIiBmb250LXdlaWdodD0iYm9sZCI+UHJvamVjdCBWaWthczwvdGV4dD4KICA8dGV4dCB4PSIzMDAiIHk9IjM4OCIgZmlsbD0iIzhhYjRmOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsIj5Ta2lsbCBEZXZlbG9wbWVudCAmYW1wOyBDYXJlZXJzPC90ZXh0Pgo8L3N2Zz4=" alt="Project Vikas"/></div>
-      <div class="project-card-body">
-        <span class="project-icon">&#128295;</span>
-        <div class="project-name">Project Vikas</div>
-        <p class="project-desc">1,000+ internship opportunities across digital marketing, content writing, HR, events and more &mdash; bridging education and employability.</p>
-        <span class="project-tag">Skill Development</span>
+    <div class="proj-card reveal">
+      <img class="proj-card-img" src="project_vikas.png" alt="Project Vikas"/>
+      <div class="proj-overlay"></div>
+      <div class="proj-info">
+        <div class="proj-tag">Skill Development</div>
+        <div class="proj-name">Project Vikas</div>
+        <p class="proj-desc">1,000+ internships in digital marketing, design, HR, events and more — bridging the gap between education and employability.</p>
+        <div class="proj-arrow">Learn more &rarr;</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="impact">
-  <div class="impact-grid">
+<!-- IMPACT -->
+<section class="impact-section" id="impact">
+  <div class="impact-layout">
     <div class="reveal">
-      <div class="section-tag">Social Impact</div>
-      <h2 class="section-title">Why This <span>Work Matters</span></h2>
-      <p class="section-sub">Every initiative creates measurable, life-changing outcomes for communities that need it most.</p>
+      <div class="tag">Social Impact</div>
+      <h2 class="sec-title">Why This<br/><em>Work Matters</em></h2>
+      <p class="sec-sub">Every initiative creates measurable, life-changing outcomes for the communities that need it most, across the length and breadth of India.</p>
       <ul class="impact-list">
-        <li>Over 50,000+ beneficiaries have received direct support through our projects across 28 states in India.</li>
-        <li>20,000+ trees planted under Project Prakriti, contributing to cleaner air and climate resilience.</li>
-        <li>Hundreds of underprivileged children now have access to quality education through BachpanSala.</li>
-        <li>900+ women gaining financial independence through Project Udaan&rsquo;s skill-building programs.</li>
-        <li>50+ stray animals rescued, fed, and cared for every day through Project Jeev.</li>
-        <li>Youth-led model ensures campaigns are driven by energy, creativity, and genuine passion.</li>
+        <li><span class="check">✓</span>Over 50,000+ beneficiaries supported directly across 28 states in India.</li>
+        <li><span class="check">✓</span>20,000+ saplings planted under Project Prakriti, fighting deforestation.</li>
+        <li><span class="check">✓</span>900+ women gaining financial independence through Project Udaan.</li>
+        <li><span class="check">✓</span>Hundreds of children given access to quality education via BachpanSala.</li>
+        <li><span class="check">✓</span>50+ stray animals rescued and fed daily through Project Jeev.</li>
+        <li><span class="check">✓</span>Youth-powered model ensures authentic, on-ground, passionate action.</li>
       </ul>
     </div>
-    <div class="impact-visual reveal">
-      <div class="impact-card"><div class="impact-icon">&#127758;</div><div class="impact-num">50,000+</div><div class="impact-lbl">Lives Directly Touched</div></div>
-      <div class="impact-card"><div class="impact-icon">&#127807;</div><div class="impact-num">20,000+</div><div class="impact-lbl">Trees Planted</div></div>
-      <div class="impact-card"><div class="impact-icon">&#128105;&#8205;&#127891;</div><div class="impact-num">900+</div><div class="impact-lbl">Women Empowered</div></div>
-      <div class="impact-card"><div class="impact-icon">&#129309;</div><div class="impact-num">200+</div><div class="impact-lbl">Active Volunteers</div></div>
+    <div class="impact-cards reveal">
+      <div class="imp-card featured">
+        <div class="imp-icon">&#127758;</div>
+        <div class="imp-num">50,000+</div>
+        <div class="imp-lbl">Lives Directly Touched</div>
+      </div>
+      <div class="imp-card">
+        <div class="imp-icon">&#127807;</div>
+        <div class="imp-num">20K+</div>
+        <div class="imp-lbl">Trees Planted</div>
+      </div>
+      <div class="imp-card">
+        <div class="imp-icon">&#128105;</div>
+        <div class="imp-num">900+</div>
+        <div class="imp-lbl">Women Empowered</div>
+      </div>
+      <div class="imp-card">
+        <div class="imp-icon">&#128218;</div>
+        <div class="imp-num">500+</div>
+        <div class="imp-lbl">Children Educated</div>
+      </div>
+      <div class="imp-card">
+        <div class="imp-icon">&#129309;</div>
+        <div class="imp-num">200+</div>
+        <div class="imp-lbl">Volunteers</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- GALLERY -->
 <section class="gallery-section" id="gallery">
-  <div class="gallery-header reveal">
-    <div class="section-tag">From the Ground</div>
-    <h2 class="section-title">Our Work <span>In Action</span></h2>
-    <p style="color:var(--muted);font-size:0.97rem;margin-top:8px;">Illustrations of InAmigos Foundation activities &amp; campaigns &mdash; click to enlarge</p>
+  <div class="gal-header reveal">
+    <div>
+      <div class="tag">From the Ground</div>
+      <h2 class="sec-title" style="color:white">Our Work <em style="color:var(--gold)">In Action</em></h2>
+    </div>
+    <div class="gal-count">13</div>
   </div>
-  <div class="gallery-grid" id="galleryGrid">
-    <div class="gallery-item wide tall reveal" data-index="0"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMwZDMzMjAiLz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iIzFhNGQyZSIgb3BhY2l0eT0iMC42Ii8+CiAgPGVsbGlwc2UgY3g9IjQwMCIgY3k9IjYwMCIgcng9IjQ1MCIgcnk9IjEwMCIgZmlsbD0iIzA4MWEwZiIvPgogIDxnIGZpbGw9IiMwYTJhMTgiIG9wYWNpdHk9IjAuOSI+CiAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIzNDAiIHI9IjMwIi8+PGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQwMCIgcng9IjM4IiByeT0iNTUiLz4KICAgIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjMzMCIgcj0iMjgiLz48ZWxsaXBzZSBjeD0iMzAwIiBjeT0iMzg4IiByeD0iMzUiIHJ5PSI1MiIvPgogICAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMzI1IiByPSIzMiIvPjxlbGxpcHNlIGN4PSI0MDAiIGN5PSIzODgiIHJ4PSI0MCIgcnk9IjU4Ii8+CiAgICA8Y2lyY2xlIGN4PSI1MDAiIGN5PSIzMzAiIHI9IjI4Ii8+PGVsbGlwc2UgY3g9IjUwMCIgY3k9IjM4OCIgcng9IjM1IiByeT0iNTIiLz4KICAgIDxjaXJjbGUgY3g9IjYwMCIgY3k9IjM0MCIgcj0iMzAiLz48ZWxsaXBzZSBjeD0iNjAwIiBjeT0iNDAwIiByeD0iMzgiIHJ5PSI1NSIvPgogIDwvZz4KICA8ZyBzdHJva2U9IiNmNWE2MjMiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC43Ij4KICAgIDxsaW5lIHgxPSIyMDAiIHkxPSIzNDAiIHgyPSIxNzUiIHkyPSIyOTAiLz48bGluZSB4MT0iNDAwIiB5MT0iMzI1IiB4Mj0iMzc1IiB5Mj0iMjcyIi8+PGxpbmUgeDE9IjYwMCIgeTE9IjM0MCIgeDI9IjYyOCIgeTI9IjI4OCIvPgogIDwvZz4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMWE0ZDJlIiBvcGFjaXR5PSIwLjgiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjQwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIGZvbnQtd2VpZ2h0PSJib2xkIj4jSW5BbWlnb3MgVm9sdW50ZWVyIFJhbGx5PC90ZXh0PgogIDwvc3ZnPg==" alt="InAmigos Volunteers"/><div class="overlay"><span class="overlay-label">#InAmigos Volunteers</span></div></div>
-    <div class="gallery-item reveal" data-index="1"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWE0ZDJlIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkN2E0ZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmcxKSIvPgogIDwhLS0gc2VydmluZyBib3dsIC0tPgogIDxlbGxpcHNlIGN4PSIzMDAiIGN5PSIyMjAiIHJ4PSIxMjAiIHJ5PSI0MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC45Ii8+CiAgPHBhdGggZD0iTTE4MCAyMjAgUTE4MCAzMDAgMzAwIDMwMCBRNDIwIDMwMCA0MjAgMjIwIiBmaWxsPSIjZTg5NDBmIiBvcGFjaXR5PSIwLjkiLz4KICA8IS0tIHN0ZWFtIC0tPgogIDxnIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC41Ij4KICAgIDxwYXRoIGQ9Ik0yNDAgMjAwIFEyNTAgMTc1IDI0MCAxNTAiLz4KICAgIDxwYXRoIGQ9Ik0zMDAgMTk1IFEzMTAgMTY4IDMwMCAxNDAiLz4KICAgIDxwYXRoIGQ9Ik0zNjAgMjAwIFEzNzAgMTczIDM2MCAxNDgiLz4KICA8L2c+CiAgPCEtLSBoYW5kcyBob2xkaW5nIC0tPgogIDxlbGxpcHNlIGN4PSIxODAiIGN5PSIyNDAiIHJ4PSI0MCIgcnk9IjE4IiBmaWxsPSIjYzg5NTZiIiBvcGFjaXR5PSIwLjgiLz4KICA8ZWxsaXBzZSBjeD0iNDIwIiBjeT0iMjQwIiByeD0iNDAiIHJ5PSIxOCIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44Ii8+CiAgPCEtLSBsYWJlbCAtLT4KICA8dGV4dCB4PSIzMDAiIHk9IjM1MCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhIiBmb250LXdlaWdodD0iYm9sZCI+UHJvamVjdCBTZXZhPC90ZXh0PgogIDx0ZXh0IHg9IjMwMCIgeT0iMzc1IiBmaWxsPSIjZjVhNjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LWZhbWlseT0iQXJpYWwiPkZvb2QgJmFtcDsgQ2xvdGhpbmcgRGlzdHJpYnV0aW9uPC90ZXh0PgogIDwhLS0gZGVjb3JhdGl2ZSBkb3RzIC0tPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjMwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4wNSIvPgogIDxjaXJjbGUgY3g9IjU1MCIgY3k9IjM1MCIgcj0iNTAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==" alt="Project Seva"/><div class="overlay"><span class="overlay-label">Project Seva</span></div></div>
-    <div class="gallery-item reveal" data-index="2"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWEzZDZiIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkNWE5ZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmcyKSIvPgogIDwhLS0gYmxhY2tib2FyZCAtLT4KICA8cmVjdCB4PSI4MCIgeT0iNjAiIHdpZHRoPSI0NDAiIGhlaWdodD0iMjAwIiByeD0iOCIgZmlsbD0iIzFhNWMyYSIvPgogIDxyZWN0IHg9IjkwIiB5PSI3MCIgd2lkdGg9IjQyMCIgaGVpZ2h0PSIxODAiIHJ4PSI0IiBmaWxsPSIjMWU2YjMwIi8+CiAgPCEtLSBjaGFsayB0ZXh0IG9uIGJvYXJkIC0tPgogIDx0ZXh0IHg9IjMwMCIgeT0iMTQwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyOCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIG9wYWNpdHk9IjAuOSI+QSBCIEMgRDwvdGV4dD4KICA8dGV4dCB4PSIzMDAiIHk9IjE4NSIgZmlsbD0iI2Y1YTYyMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBvcGFjaXR5PSIwLjgiPjEgKyAxID0gMjwvdGV4dD4KICA8bGluZSB4MT0iMTIwIiB5MT0iMjE1IiB4Mj0iNDgwIiB5Mj0iMjE1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMyIvPgogIDwhLS0gY2hhbGsgdHJheSAtLT4KICA8cmVjdCB4PSI4MCIgeT0iMjYwIiB3aWR0aD0iNDQwIiBoZWlnaHQ9IjEyIiByeD0iMyIgZmlsbD0iIzBkMzUyMCIvPgogIDwhLS0gc2l0dGluZyBjaGlsZHJlbiBzaWxob3VldHRlcyAtLT4KICA8ZyBmaWxsPSIjMGQyNTQ1IiBvcGFjaXR5PSIwLjgiPgogICAgPGNpcmNsZSBjeD0iMTYwIiBjeT0iMzMwIiByPSIxOCIvPgogICAgPGVsbGlwc2UgY3g9IjE2MCIgY3k9IjM3MCIgcng9IjIyIiByeT0iMjAiLz4KICAgIDxjaXJjbGUgY3g9IjI0MCIgY3k9IjMyNSIgcj0iMTgiLz4KICAgIDxlbGxpcHNlIGN4PSIyNDAiIGN5PSIzNjUiIHJ4PSIyMiIgcnk9IjIwIi8+CiAgICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIzMjgiIHI9IjE4Ii8+CiAgICA8ZWxsaXBzZSBjeD0iMzIwIiBjeT0iMzY4IiByeD0iMjIiIHJ5PSIyMCIvPgogICAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMzI2IiByPSIxOCIvPgogICAgPGVsbGlwc2UgY3g9IjQwMCIgY3k9IjM2NiIgcng9IjIyIiByeT0iMjAiLz4KICAgIDxjaXJjbGUgY3g9IjQ3MCIgY3k9IjMzMCIgcj0iMTYiLz4KICAgIDxlbGxpcHNlIGN4PSI0NzAiIGN5PSIzNjgiIHJ4PSIyMCIgcnk9IjE5Ii8+CiAgPC9nPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzk1IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsIiBvcGFjaXR5PSIwLjciPlByb2plY3QgQmFjaHBhblNhbGEg4oCUIEVkdWNhdGlvbiBmb3IgQWxsPC90ZXh0Pgo8L3N2Zz4=" alt="BachpanSala"/><div class="overlay"><span class="overlay-label">BachpanSala</span></div></div>
-    <div class="gallery-item reveal" data-index="3"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxYTFhM2QiLz4KICA8cmVjdCB4PSI4MCIgeT0iNTAiIHdpZHRoPSI0NDAiIGhlaWdodD0iMjEwIiByeD0iOCIgZmlsbD0iIzFhNWMyYSIvPgogIDxyZWN0IHg9IjkwIiB5PSI2MCIgd2lkdGg9IjQyMCIgaGVpZ2h0PSIxOTAiIHJ4PSI0IiBmaWxsPSIjMWU2YjMwIi8+CiAgPHRleHQgeD0iMzAwIiB5PSIxMzUiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjMyIiBmb250LWZhbWlseT0iR2VvcmdpYSIgb3BhY2l0eT0iMC45NSI+QSBCIEMgRCBFIEY8L3RleHQ+CiAgPHRleHQgeD0iMzAwIiB5PSIxODUiIGZpbGw9IiNmNWE2MjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgb3BhY2l0eT0iMC44NSI+MiArIDIgPSA0IOKckzwvdGV4dD4KICA8cmVjdCB4PSI4MCIgeT0iMjYwIiB3aWR0aD0iNDQwIiBoZWlnaHQ9IjE0IiByeD0iMyIgZmlsbD0iIzBkMzUyMCIvPgogIDxnIGZpbGw9IiMwZDFhM2QiIG9wYWNpdHk9IjAuODUiPgogICAgPGNpcmNsZSBjeD0iMTUwIiBjeT0iMzMwIiByPSIyMCIvPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIzNjgiIHJ4PSIyNCIgcnk9IjIyIi8+CiAgICA8Y2lyY2xlIGN4PSIyMjAiIGN5PSIzMjUiIHI9IjIwIi8+PGVsbGlwc2UgY3g9IjIyMCIgY3k9IjM2MyIgcng9IjI0IiByeT0iMjIiLz4KICAgIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjMyOCIgcj0iMjAiLz48ZWxsaXBzZSBjeD0iMzAwIiBjeT0iMzY2IiByeD0iMjQiIHJ5PSIyMiIvPgogICAgPGNpcmNsZSBjeD0iMzgwIiBjeT0iMzI1IiByPSIyMCIvPjxlbGxpcHNlIGN4PSIzODAiIGN5PSIzNjMiIHJ4PSIyNCIgcnk9IjIyIi8+CiAgICA8Y2lyY2xlIGN4PSI0NTAiIGN5PSIzMzAiIHI9IjE4Ii8+PGVsbGlwc2UgY3g9IjQ1MCIgY3k9IjM2NiIgcng9IjIyIiByeT0iMjAiLz4KICA8L2c+CiAgPHRleHQgeD0iMzAwIiB5PSIzOTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iQXJpYWwiIG9wYWNpdHk9IjAuNyI+QmFjaHBhblNhbGEg4oCUIEJyaWRnaW5nIHRoZSBFZHVjYXRpb24gR2FwPC90ZXh0PgogIDwvc3ZnPg==" alt="Education"/><div class="overlay"><span class="overlay-label">Education Drive</span></div></div>
-    <div class="gallery-item wide reveal" data-index="4"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxYTRkNmIiLz4KICA8ZWxsaXBzZSBjeD0iMzAwIiBjeT0iNDAwIiByeD0iMzIwIiByeT0iNzAiIGZpbGw9IiMwYTJhMTgiLz4KICA8cmVjdCB4PSIyNzgiIHk9IjE5MCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjE1MCIgZmlsbD0iIzVjM2ExZSIvPgogIDxjaXJjbGUgY3g9IjI5MCIgY3k9IjE2MCIgcj0iNjUiIGZpbGw9IiMxYTZiMmUiLz4KICA8Y2lyY2xlIGN4PSIyNTAiIGN5PSIxODUiIHI9IjQyIiBmaWxsPSIjMWU3YTM1Ii8+CiAgPGNpcmNsZSBjeD0iMzMwIiBjeT0iMTg1IiByPSI0MiIgZmlsbD0iIzFlN2EzNSIvPgogIDxjaXJjbGUgY3g9IjI5MCIgY3k9IjEyMiIgcj0iNDgiIGZpbGw9IiMyMjg4M2MiLz4KICA8cmVjdCB4PSIxMDgiIHk9IjI5NSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjY4IiBmaWxsPSIjNWMzYTFlIi8+CiAgPGNpcmNsZSBjeD0iMTE2IiBjeT0iMjc1IiByPSIzMyIgZmlsbD0iIzFhNmIyZSIvPgogIDxyZWN0IHg9IjQ2MiIgeT0iMjkwIiB3aWR0aD0iMTgiIGhlaWdodD0iNzIiIGZpbGw9IiM1YzNhMWUiLz4KICA8Y2lyY2xlIGN4PSI0NzEiIGN5PSIyNjgiIHI9IjM1IiBmaWxsPSIjMWE2YjJlIi8+CiAgPHJlY3QgeD0iMTU1IiB5PSIzNDAiIHdpZHRoPSI4IiBoZWlnaHQ9IjMzIiBmaWxsPSIjNWMzYTFlIi8+CiAgPGNpcmNsZSBjeD0iMTU5IiBjeT0iMzMwIiByPSIxNSIgZmlsbD0iIzIyODgzYyIvPgogIDxlbGxpcHNlIGN4PSIxNDUiIGN5PSIzNTgiIHJ4PSIyMCIgcnk9IjkiIGZpbGw9IiNjODk1NmIiIG9wYWNpdHk9IjAuOCIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4IDE0NSAzNTgpIi8+CiAgPGVsbGlwc2UgY3g9IjE3NSIgY3k9IjM1NiIgcng9IjIwIiByeT0iOSIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44IiB0cmFuc2Zvcm09InJvdGF0ZSgxOCAxNzUgMzU2KSIvPgogIDxjaXJjbGUgY3g9IjUwMCIgY3k9Ijc1IiByPSI1MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC42NSIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzkwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIGZvbnQtd2VpZ2h0PSJib2xkIj5Qcm9qZWN0IFByYWtyaXRpIOKAlCAyMCwwMDArIFRyZWVzIFBsYW50ZWQ8L3RleHQ+CiAgPC9zdmc+" alt="Project Prakriti"/><div class="overlay"><span class="overlay-label">Project Prakriti</span></div></div>
-    <div class="gallery-item reveal" data-index="5"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMyYTE4MDAiLz4KICA8ZWxsaXBzZSBjeD0iMzAwIiBjeT0iMjUwIiByeD0iMTYwIiByeT0iNTUiIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuODUiLz4KICA8cGF0aCBkPSJNMTQwIDI1MCBRMTQwIDM0MCAzMDAgMzQwIFE0NjAgMzQwIDQ2MCAyNTAiIGZpbGw9IiNlODk0MGYiIG9wYWNpdHk9IjAuODUiLz4KICA8ZyBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNCI+CiAgICA8cGF0aCBkPSJNMjMwIDIzMCBRMjQwIDIwMCAyMzAgMTcwIi8+PHBhdGggZD0iTTMwMCAyMjUgUTMxMCAxOTMgMzAwIDE2MiIvPjxwYXRoIGQ9Ik0zNzAgMjMwIFEzODAgMjAwIDM3MCAxNzAiLz4KICA8L2c+CiAgPGVsbGlwc2UgY3g9IjE0MCIgY3k9IjI2OCIgcng9IjUwIiByeT0iMjAiIGZpbGw9IiNjODk1NmIiIG9wYWNpdHk9IjAuOCIvPgogIDxlbGxpcHNlIGN4PSI0NjAiIGN5PSIyNjgiIHJ4PSI1MCIgcnk9IjIwIiBmaWxsPSIjYzg5NTZiIiBvcGFjaXR5PSIwLjgiLz4KICA8dGV4dCB4PSIzMDAiIHk9IjM3NSIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhIiBmb250LXdlaWdodD0iYm9sZCI+UHJvamVjdCBTZXZhIOKAlCBGZWVkaW5nIFRob3VzYW5kczwvdGV4dD4KICA8L3N2Zz4=" alt="Food Distribution"/><div class="overlay"><span class="overlay-label">Food Distribution</span></div></div>
-    <div class="gallery-item reveal" data-index="6"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNmIxYTRkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzllMmQ3YSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmczKSIvPgogIDwhLS0gcmlzaW5nIGZpZ3VyZSB3aXRoIGFybXMgdXAgLS0+CiAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMTYwIiByPSIzNSIgZmlsbD0iI2Y1YzhlMCIgb3BhY2l0eT0iMC45Ii8+CiAgPCEtLSBib2R5IC0tPgogIDxwYXRoIGQ9Ik0yNzAgMTk1IFEzMDAgMjgwIDMzMCAxOTUiIGZpbGw9IiNlODVjYTAiIG9wYWNpdHk9IjAuOCIvPgogIDwhLS0gYXJtcyByYWlzZWQgLS0+CiAgPGxpbmUgeDE9IjI3MCIgeTE9IjIxMCIgeDI9IjIxMCIgeTI9IjE2MCIgc3Ryb2tlPSIjZjVjOGUwIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIzMzAiIHkxPSIyMTAiIHgyPSIzOTAiIHkyPSIxNjAiIHN0cm9rZT0iI2Y1YzhlMCIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIGJpcmRzL3dpbmdzIC0tPgogIDxwYXRoIGQ9Ik0xODAgMTQwIFEyMjAgMTEwIDIxMCAxNjAiIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuNyIvPgogIDxwYXRoIGQ9Ik00MjAgMTQwIFEzODAgMTEwIDM5MCAxNjAiIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuNyIvPgogIDxwYXRoIGQ9Ik0xMjAgMTIwIFExNTUgOTUgMTQ4IDEzNSIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC41Ii8+CiAgPHBhdGggZD0iTTQ4MCAxMTggUTQ0NSA5MyA0NTIgMTMzIiBmaWxsPSIjZjVhNjIzIiBvcGFjaXR5PSIwLjUiLz4KICA8IS0tIHN0YXJzL3NwYXJrbGVzIC0tPgogIDxnIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuOCI+CiAgICA8Y2lyY2xlIGN4PSIxNTAiIGN5PSI4MCIgcj0iNSIvPgogICAgPGNpcmNsZSBjeD0iNDUwIiBjeT0iNzUiIHI9IjUiLz4KICAgIDxjaXJjbGUgY3g9IjMyMCIgY3k9IjYwIiByPSI0Ii8+CiAgICA8Y2lyY2xlIGN4PSI4MCIgY3k9IjIwMCIgcj0iNCIvPgogICAgPGNpcmNsZSBjeD0iNTIwIiBjeT0iMTkwIiByPSI0Ii8+CiAgPC9nPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzMwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIGZvbnQtd2VpZ2h0PSJib2xkIj5Qcm9qZWN0IFVkYWFuPC90ZXh0PgogIDx0ZXh0IHg9IjMwMCIgeT0iMzU4IiBmaWxsPSIjZjVjOGUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LWZhbWlseT0iQXJpYWwiPldvbWVuIEVtcG93ZXJtZW50PC90ZXh0Pgo8L3N2Zz4=" alt="Project Udaan"/><div class="overlay"><span class="overlay-label">Project Udaan</span></div></div>
-    <div class="gallery-item reveal" data-index="7"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnNCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjM2QyYTAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzdhNWEwMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmc0KSIvPgogIDwhLS0gZG9nIHNpbGhvdWV0dGUgLS0+CiAgPGVsbGlwc2UgY3g9IjI4MCIgY3k9IjI1MCIgcng9IjkwIiByeT0iNTUiIGZpbGw9IiNjODk1NmIiIG9wYWNpdHk9IjAuODUiLz4KICA8Y2lyY2xlIGN4PSIzNTAiIGN5PSIyMTUiIHI9IjQyIiBmaWxsPSIjYzg5NTZiIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPCEtLSBlYXJzIC0tPgogIDxlbGxpcHNlIGN4PSIzMzUiIGN5PSIxODUiIHJ4PSIxNSIgcnk9IjIyIiBmaWxsPSIjYjA3ODQwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTUgMzM1IDE4NSkiLz4KICA8ZWxsaXBzZSBjeD0iMzcyIiBjeT0iMTgyIiByeD0iMTQiIHJ5PSIyMSIgZmlsbD0iI2IwNzg0MCIgdHJhbnNmb3JtPSJyb3RhdGUoMTAgMzcyIDE4MikiLz4KICA8IS0tIGV5ZXMgLS0+CiAgPGNpcmNsZSBjeD0iMzQyIiBjeT0iMjEwIiByPSI2IiBmaWxsPSIjMmExODAwIi8+CiAgPGNpcmNsZSBjeD0iMzY1IiBjeT0iMjA4IiByPSI2IiBmaWxsPSIjMmExODAwIi8+CiAgPGNpcmNsZSBjeD0iMzQ0IiBjeT0iMjA4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjM2NyIgY3k9IjIwNiIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjM1NSIgY3k9IjIyNSIgcng9IjgiIHJ5PSI1IiBmaWxsPSIjMmExODAwIi8+CiAgPCEtLSB0YWlsIC0tPgogIDxwYXRoIGQ9Ik0xOTAgMjUwIFExNTAgMjIwIDE2MCAxOTAiIHN0cm9rZT0iI2M4OTU2YiIgc3Ryb2tlLXdpZHRoPSIxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPCEtLSBsZWdzIC0tPgogIDxyZWN0IHg9IjIyMCIgeT0iMjkwIiB3aWR0aD0iMTgiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjYjA3ODQwIi8+CiAgPHJlY3QgeD0iMjU1IiB5PSIyOTUiIHdpZHRoPSIxOCIgaGVpZ2h0PSIzOCIgcng9IjgiIGZpbGw9IiNiMDc4NDAiLz4KICA8cmVjdCB4PSIzMDAiIHk9IjI5MyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjM4IiByeD0iOCIgZmlsbD0iI2IwNzg0MCIvPgogIDxyZWN0IHg9IjMzNSIgeT0iMjkwIiB3aWR0aD0iMTgiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjYjA3ODQwIi8+CiAgPCEtLSBoYW5kIGZlZWRpbmcgLS0+CiAgPHBhdGggZD0iTTM4MCAyMzAgUTQzMCAyMTAgNDIwIDI2MCIgZmlsbD0iI2Q0YTg3YSIgb3BhY2l0eT0iMC44Ii8+CiAgPCEtLSBoZWFydCAtLT4KICA8cGF0aCBkPSJNNDYwIDEwMCBDNDYwIDg1IDQ0NSA3NSA0MzUgODUgQzQyNSA3NSA0MTAgODUgNDEwIDEwMCBDNDEwIDExNSA0MzUgMTM1IDQzNSAxMzUgQzQzNSAxMzUgNDYwIDExNSA0NjAgMTAwWiIgZmlsbD0iI2U4NWM1YyIgb3BhY2l0eT0iMC44Ii8+CiAgPHRleHQgeD0iMzAwIiB5PSIzNjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIyIiBmb250LWZhbWlseT0iR2VvcmdpYSIgZm9udC13ZWlnaHQ9ImJvbGQiPlByb2plY3QgSmVldjwvdGV4dD4KICA8dGV4dCB4PSIzMDAiIHk9IjM4NSIgZmlsbD0iI2Y1ZDA4YSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsIj5BbmltYWwgV2VsZmFyZSAmYW1wOyBQcm90ZWN0aW9uPC90ZXh0Pgo8L3N2Zz4=" alt="Project Jeev"/><div class="overlay"><span class="overlay-label">Project Jeev</span></div></div>
-    <div class="gallery-item wide reveal" data-index="8"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMzZDBkMmEiLz4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIxNTUiIHI9IjM4IiBmaWxsPSIjZjVjOGUwIiBvcGFjaXR5PSIwLjkyIi8+CiAgPHBhdGggZD0iTTI2NSAxOTMgUTMwMCAyODUgMzM1IDE5MyIgZmlsbD0iI2U4NWNhMCIgb3BhY2l0eT0iMC44Ii8+CiAgPGxpbmUgeDE9IjI2NSIgeTE9IjIwOCIgeDI9IjE5OCIgeTI9IjE1MiIgc3Ryb2tlPSIjZjVjOGUwIiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIzMzUiIHkxPSIyMDgiIHgyPSI0MDIiIHkyPSIxNTIiIHN0cm9rZT0iI2Y1YzhlMCIgc3Ryb2tlLXdpZHRoPSI5IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTc1IDEzNSBRMjE1IDEwNSAyMDggMTU1IiBmaWxsPSIjZjVhNjIzIiBvcGFjaXR5PSIwLjc1Ii8+CiAgPHBhdGggZD0iTTQyNSAxMzMgUTM4NSAxMDMgMzkyIDE1MyIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC43NSIvPgogIDxwYXRoIGQ9Ik0xMTAgMTE1IFExNDUgOTAgMTQwIDEzMCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC41Ii8+CiAgPHBhdGggZD0iTTQ5MCAxMTMgUTQ1NSA4OCA0NjAgMTI4IiBmaWxsPSIjZjVhNjIzIiBvcGFjaXR5PSIwLjUiLz4KICA8ZyBmaWxsPSIjZjVhNjIzIiBvcGFjaXR5PSIwLjg1Ij48Y2lyY2xlIGN4PSIxNTUiIGN5PSI3NSIgcj0iNiIvPjxjaXJjbGUgY3g9IjQ1NSIgY3k9IjcwIiByPSI2Ii8+PGNpcmNsZSBjeD0iMzIwIiBjeT0iNTUiIHI9IjUiLz48Y2lyY2xlIGN4PSI4MCIgY3k9IjE5NSIgcj0iNSIvPjxjaXJjbGUgY3g9IjUyMCIgY3k9IjE4NSIgcj0iNSIvPjwvZz4KICA8dGV4dCB4PSIzMDAiIHk9IjMzMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhIiBmb250LXdlaWdodD0iYm9sZCI+UHJvamVjdCBVZGFhbjwvdGV4dD4KICA8dGV4dCB4PSIzMDAiIHk9IjM1OCIgZmlsbD0iI2Y1YzhlMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNCI+OTAwKyBXb21lbiBFbXBvd2VyZWQ8L3RleHQ+CiAgPC9zdmc+" alt="Women Empowerment"/><div class="overlay"><span class="overlay-label">Women Empowerment</span></div></div>
-    <div class="gallery-item reveal" data-index="9"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnNSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWE2YjhhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhNGQyZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmc1KSIvPgogIDwhLS0gc3VuIC0tPgogIDxjaXJjbGUgY3g9IjUwMCIgY3k9IjgwIiByPSI1NSIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC43Ii8+CiAgPGcgc3Ryb2tlPSIjZjVhNjIzIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuNCI+CiAgICA8bGluZSB4MT0iNTAwIiB5MT0iMTAiIHgyPSI1MDAiIHkyPSIzMCIvPgogICAgPGxpbmUgeDE9IjUwMCIgeTE9IjEzMCIgeDI9IjUwMCIgeTI9IjE1MCIvPgogICAgPGxpbmUgeDE9IjQzMCIgeTE9IjgwIiB4Mj0iNDEwIiB5Mj0iODAiLz4KICAgIDxsaW5lIHgxPSI1NzAiIHkxPSI4MCIgeDI9IjU5MCIgeTI9IjgwIi8+CiAgICA8bGluZSB4MT0iNDUwIiB5MT0iMzAiIHgyPSI0MzgiIHkyPSI0MiIvPgogICAgPGxpbmUgeDE9IjU1MCIgeTE9IjEzMCIgeDI9IjU2MiIgeTI9IjExOCIvPgogIDwvZz4KICA8IS0tIGdyb3VuZCAtLT4KICA8ZWxsaXBzZSBjeD0iMzAwIiBjeT0iNDAwIiByeD0iMzUwIiByeT0iODAiIGZpbGw9IiMwYTMzMTgiLz4KICA8IS0tIGJpZyB0cmVlIGNlbnRlciAtLT4KICA8cmVjdCB4PSIyODUiIHk9IjIwMCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iIzVjM2ExZSIvPgogIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjE3MCIgcj0iNzAiIGZpbGw9IiMxYTZiMmUiLz4KICA8Y2lyY2xlIGN4PSIyNjAiIGN5PSIxOTUiIHI9IjQ1IiBmaWxsPSIjMWU3YTM1Ii8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMTk1IiByPSI0NSIgZmlsbD0iIzFlN2EzNSIvPgogIDxjaXJjbGUgY3g9IjMwMCIgY3k9IjEzNSIgcj0iNTAiIGZpbGw9IiMyMjg4M2MiLz4KICA8IS0tIHNtYWxsIHRyZWVzIC0tPgogIDxyZWN0IHg9IjExNSIgeT0iMzAwIiB3aWR0aD0iMTgiIGhlaWdodD0iNzAiIGZpbGw9IiM1YzNhMWUiLz4KICA8Y2lyY2xlIGN4PSIxMjQiIGN5PSIyODAiIHI9IjM1IiBmaWxsPSIjMWE2YjJlIi8+CiAgPHJlY3QgeD0iNDY1IiB5PSIyOTUiIHdpZHRoPSIyMCIgaGVpZ2h0PSI3NSIgZmlsbD0iIzVjM2ExZSIvPgogIDxjaXJjbGUgY3g9IjQ3NSIgY3k9IjI3MiIgcj0iMzgiIGZpbGw9IiMxYTZiMmUiLz4KICA8IS0tIHNhcGxpbmcgYmVpbmcgcGxhbnRlZCAtLT4KICA8cmVjdCB4PSIxNTgiIHk9IjM0MCIgd2lkdGg9IjgiIGhlaWdodD0iMzUiIGZpbGw9IiM1YzNhMWUiLz4KICA8Y2lyY2xlIGN4PSIxNjIiIGN5PSIzMzAiIHI9IjE2IiBmaWxsPSIjMjI4ODNjIi8+CiAgPCEtLSBoYW5kcyBwbGFudGluZyAtLT4KICA8ZWxsaXBzZSBjeD0iMTQ1IiBjeT0iMzYwIiByeD0iMjIiIHJ5PSIxMCIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44IiB0cmFuc2Zvcm09InJvdGF0ZSgtMjAgMTQ1IDM2MCkiLz4KICA8ZWxsaXBzZSBjeD0iMTgwIiBjeT0iMzU4IiByeD0iMjIiIHJ5PSIxMCIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44IiB0cmFuc2Zvcm09InJvdGF0ZSgyMCAxODAgMzU4KSIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzkwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIGZvbnQtd2VpZ2h0PSJib2xkIj5Qcm9qZWN0IFByYWtyaXRpIOKAlCAyMCwwMDArIFRyZWVzIFBsYW50ZWQ8L3RleHQ+Cjwvc3ZnPg==" alt="Prakriti"/><div class="overlay"><span class="overlay-label">Project Prakriti</span></div></div>
-    <div class="gallery-item reveal" data-index="10"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnNiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWEyZDRkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkNGE3YSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmc2KSIvPgogIDwhLS0gbGFwdG9wIC0tPgogIDxyZWN0IHg9IjE2MCIgeT0iMTQwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjE3NSIgcng9IjEyIiBmaWxsPSIjMmEzZDVjIi8+CiAgPHJlY3QgeD0iMTcwIiB5PSIxNTAiIHdpZHRoPSIyNjAiIGhlaWdodD0iMTU1IiByeD0iNiIgZmlsbD0iIzFhNWM4YSIvPgogIDwhLS0gc2NyZWVuIGNvbnRlbnQgLSBiYXIgY2hhcnQgLS0+CiAgPGc+CiAgICA8cmVjdCB4PSIxOTUiIHk9IjI0MCIgd2lkdGg9IjI1IiBoZWlnaHQ9IjUwIiBmaWxsPSIjNGNhZjcyIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxyZWN0IHg9IjIzMCIgeT0iMjIwIiB3aWR0aD0iMjUiIGhlaWdodD0iNzAiIGZpbGw9IiM0Y2FmNzIiIG9wYWNpdHk9IjAuOSIvPgogICAgPHJlY3QgeD0iMjY1IiB5PSIyMDAiIHdpZHRoPSIyNSIgaGVpZ2h0PSI5MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC45Ii8+CiAgICA8cmVjdCB4PSIzMDAiIHk9IjE4NSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjEwNSIgZmlsbD0iIzRjYWY3MiIvPgogICAgPHJlY3QgeD0iMzM1IiB5PSIxNzAiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNmNWE2MjMiLz4KICAgIDxyZWN0IHg9IjM3MCIgeT0iMTU1IiB3aWR0aD0iMjUiIGhlaWdodD0iMTM1IiBmaWxsPSIjNGNhZjcyIi8+CiAgICA8IS0tIHRyZW5kIGxpbmUgLS0+CiAgICA8cG9seWxpbmUgcG9pbnRzPSIyMDcsMjQwIDI0MiwyMTggMjc3LDE5OCAzMTIsMTgyIDM0NywxNjcgMzgyLDE1MiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjciLz4KICA8L2c+CiAgPCEtLSBsYXB0b3AgYmFzZSAtLT4KICA8cGF0aCBkPSJNMTMwIDMxNSBMMTcwIDMxNSBMMTYwIDMyNSBMNDQwIDMyNSBMNDMwIDMxNSBMNDcwIDMxNSBMNDkwIDMzNSBMMTEwIDMzNVoiIGZpbGw9IiMyYTNkNWMiLz4KICA8IS0tIGdyb3dpbmcgYXJyb3cgLS0+CiAgPHBhdGggZD0iTTQ5MCAxMDAgTDU0MCA2MCBMNTMwIDg1IEw1NjAgNzUgTDU0MCA2MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC44Ii8+CiAgPCEtLSBjZXJ0aWZpY2F0ZSBiYWRnZSAtLT4KICA8Y2lyY2xlIGN4PSI1MTAiIGN5PSIyODAiIHI9IjQ1IiBmaWxsPSIjMWE0ZDJlIiBzdHJva2U9IiNmNWE2MjMiIHN0cm9rZS13aWR0aD0iMyIvPgogIDx0ZXh0IHg9IjUxMCIgeT0iMjczIiBmaWxsPSIjZjVhNjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIj5TS0lMTDwvdGV4dD4KICA8dGV4dCB4PSI1MTAiIHk9IjI4OCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtZmFtaWx5PSJBcmlhbCI+Q0VSVElGSUVEPC90ZXh0PgogIDxjaXJjbGUgY3g9IjUxMCIgY3k9IjI4MCIgcj0iMzgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y1YTYyMyIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KICA8dGV4dCB4PSIzMDAiIHk9IjM2NSIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhIiBmb250LXdlaWdodD0iYm9sZCI+UHJvamVjdCBWaWthczwvdGV4dD4KICA8dGV4dCB4PSIzMDAiIHk9IjM4OCIgZmlsbD0iIzhhYjRmOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsIj5Ta2lsbCBEZXZlbG9wbWVudCAmYW1wOyBDYXJlZXJzPC90ZXh0Pgo8L3N2Zz4=" alt="Project Vikas"/><div class="overlay"><span class="overlay-label">Project Vikas</span></div></div>
-    <div class="gallery-item reveal" data-index="11"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMyYTFlMDAiLz4KICA8ZWxsaXBzZSBjeD0iMjcwIiBjeT0iMjU1IiByeD0iOTUiIHJ5PSI1OCIgZmlsbD0iI2M4OTU2YiIgb3BhY2l0eT0iMC44OCIvPgogIDxjaXJjbGUgY3g9IjM0NSIgY3k9IjIxOCIgcj0iNDQiIGZpbGw9IiNjODk1NmIiIG9wYWNpdHk9IjAuODgiLz4KICA8ZWxsaXBzZSBjeD0iMzMwIiBjeT0iMTg3IiByeD0iMTYiIHJ5PSIyMyIgZmlsbD0iI2IwNzg0MCIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1IDMzMCAxODcpIi8+CiAgPGVsbGlwc2UgY3g9IjM2OCIgY3k9IjE4NCIgcng9IjE1IiByeT0iMjIiIGZpbGw9IiNiMDc4NDAiIHRyYW5zZm9ybT0icm90YXRlKDEwIDM2OCAxODQpIi8+CiAgPGNpcmNsZSBjeD0iMzM4IiBjeT0iMjEzIiByPSI3IiBmaWxsPSIjMmExODAwIi8+CiAgPGNpcmNsZSBjeD0iMzYxIiBjeT0iMjExIiByPSI3IiBmaWxsPSIjMmExODAwIi8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMjExIiByPSIyLjUiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iMzYzIiBjeT0iMjA5IiByPSIyLjUiIGZpbGw9IndoaXRlIi8+CiAgPGVsbGlwc2UgY3g9IjM1MSIgY3k9IjIyOCIgcng9IjkiIHJ5PSI2IiBmaWxsPSIjMmExODAwIi8+CiAgPHBhdGggZD0iTTE3NSAyNTggUTEzMiAyMjYgMTQzIDE5NCIgc3Ryb2tlPSIjYzg5NTZiIiBzdHJva2Utd2lkdGg9IjE1IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSIyMTUiIHk9IjI5OCIgd2lkdGg9IjE5IiBoZWlnaHQ9IjQyIiByeD0iOSIgZmlsbD0iI2IwNzg0MCIvPgogIDxyZWN0IHg9IjI1MiIgeT0iMzAzIiB3aWR0aD0iMTkiIGhlaWdodD0iNDAiIHJ4PSI5IiBmaWxsPSIjYjA3ODQwIi8+CiAgPHJlY3QgeD0iMjk4IiB5PSIzMDEiIHdpZHRoPSIxOSIgaGVpZ2h0PSI0MCIgcng9IjkiIGZpbGw9IiNiMDc4NDAiLz4KICA8cmVjdCB4PSIzMzUiIHk9IjI5OCIgd2lkdGg9IjE5IiBoZWlnaHQ9IjQyIiByeD0iOSIgZmlsbD0iI2IwNzg0MCIvPgogIDxwYXRoIGQ9Ik0zNzggMjM0IFE0MjggMjE0IDQxOCAyNjIiIGZpbGw9IiNkNGE4N2EiIG9wYWNpdHk9IjAuODIiLz4KICA8cGF0aCBkPSJNNDYwIDk4IEM0NjAgODUgNDQ3IDc3IDQzOCA4NSBDNDI5IDc3IDQxNiA4NSA0MTYgOTggQzQxNiAxMTEgNDM4IDEyNSA0MzggMTI1IEM0MzggMTI1IDQ2MCAxMTEgNDYwIDk4WiIgZmlsbD0iI2U4NWM1YyIgb3BhY2l0eT0iMC44MiIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzYyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEiIGZvbnQtd2VpZ2h0PSJib2xkIj5Qcm9qZWN0IEplZXY8L3RleHQ+CiAgPHRleHQgeD0iMzAwIiB5PSIzODciIGZpbGw9IiNmNWQwOGEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiPjUwKyBBbmltYWxzIEZlZCBEYWlseTwvdGV4dD4KICA8L3N2Zz4=" alt="Animal Welfare"/><div class="overlay"><span class="overlay-label">Animal Welfare</span></div></div>
-    <div class="gallery-item wide reveal" data-index="12"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImFiZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMGQyYTFhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhNGQyZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjYWJnKSIvPgogIDwhLS0gc3VuYnVyc3QgLS0+CiAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMjAwIiByPSIyMDAiIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuMDgiLz4KICA8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyMDAiIHI9IjE0MCIgZmlsbD0iI2Y1YTYyMyIgb3BhY2l0eT0iMC4wNiIvPgogIDwhLS0gR1JPVVAgb2YgcGVvcGxlIGluIGNpcmNsZSAoY29tbXVuaXR5KSAtLT4KICA8IS0tIGNlbnRlciBwZXJzb24gLS0+CiAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMjQwIiByPSIyOCIgZmlsbD0iI2Q0YTg3YSIvPgogIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIzMDAiIHJ4PSIzNSIgcnk9IjQ1IiBmaWxsPSIjMmQ3YTRmIi8+CiAgPCEtLSBzdXJyb3VuZGluZyBwZW9wbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjYwIiByPSIyNCIgZmlsbD0iI2M4OTU2YiIvPgogIDxlbGxpcHNlIGN4PSIzMDAiIGN5PSIzMTQiIHJ4PSIzMCIgcnk9IjQwIiBmaWxsPSIjMWE1YzNhIi8+CiAgPGNpcmNsZSBjeD0iNTAwIiBjeT0iMjYwIiByPSIyNCIgZmlsbD0iI2UwYjg5OCIvPgogIDxlbGxpcHNlIGN4PSI1MDAiIGN5PSIzMTQiIHJ4PSIzMCIgcnk9IjQwIiBmaWxsPSIjMjI3MDNlIi8+CiAgPGNpcmNsZSBjeD0iMzU1IiBjeT0iMjAwIiByPSIyMiIgZmlsbD0iI2Q0YTg3YSIvPgogIDxlbGxpcHNlIGN4PSIzNTUiIGN5PSIyNDgiIHJ4PSIyOCIgcnk9IjM4IiBmaWxsPSIjMWU2YjM1Ii8+CiAgPGNpcmNsZSBjeD0iNDQ4IiBjeT0iMTk4IiByPSIyMiIgZmlsbD0iI2M4OTU2YiIvPgogIDxlbGxpcHNlIGN4PSI0NDgiIGN5PSIyNDYiIHJ4PSIyOCIgcnk9IjM4IiBmaWxsPSIjMjU2ODM1Ii8+CiAgPCEtLSBoYW5kcyBqb2luZWQgaW4gY2VudGVyIC0tPgogIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjI5MCIgcj0iMTUiIGZpbGw9IiNmNWE2MjMiIG9wYWNpdHk9IjAuNiIvPgogIDwhLS0gSW5BbWlnb3MgdGV4dCBpbiBjZW50ZXIgLS0+CiAgPHRleHQgeD0iNDAwIiB5PSIyOTUiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjkiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC13ZWlnaHQ9ImJvbGQiIG9wYWNpdHk9IjAuOSI+VE9HRVRIRVI8L3RleHQ+CiAgPCEtLSBmbGFncy9iYW5uZXJzIC0tPgogIDxyZWN0IHg9IjYwIiB5PSI4MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSI1MCIgcng9IjQiIGZpbGw9IiMxYTRkMmUiIHN0cm9rZT0iI2Y1YTYyMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHRleHQgeD0iMTIwIiB5PSIxMDAiIGZpbGw9IiNmNWE2MjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC13ZWlnaHQ9ImJvbGQiPkluQW1pZ29zPC90ZXh0PgogIDx0ZXh0IHg9IjEyMCIgeT0iMTE4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI5IiBmb250LWZhbWlseT0iQXJpYWwiPkZvdW5kYXRpb248L3RleHQ+CiAgPGxpbmUgeDE9IjYwIiB5MT0iMTA1IiB4Mj0iMjAiIHkyPSIxMDUiIHN0cm9rZT0iI2Y1YTYyMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPCEtLSBoZWFydHMgZmxvYXRpbmcgLS0+CiAgPGcgZmlsbD0iI2U4NWM1YyIgb3BhY2l0eT0iMC42Ij4KICAgIDxwYXRoIGQ9Ik02NTAgMTIwIEM2NTAgMTA4IDYzOCAxMDAgNjMwIDEwOCBDNjIyIDEwMCA2MTAgMTA4IDYxMCAxMjAgQzYxMCAxMzIgNjMwIDE0NSA2MzAgMTQ1IEM2MzAgMTQ1IDY1MCAxMzIgNjUwIDEyMFoiLz4KICAgIDxwYXRoIGQ9Ik03MjAgODAgQzcyMCA3MSA3MTEgNjUgNzA1IDcxIEM2OTkgNjUgNjkwIDcxIDY5MCA4MCBDNjkwIDg5IDcwNSA5OCA3MDUgOTggQzcwNSA5OCA3MjAgODkgNzIwIDgwWiIvPgogIDwvZz4KICA8IS0tIGdyb3VuZC9ncmFzcyAtLT4KICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iNTgwIiByeD0iMzgwIiByeT0iNjAiIGZpbGw9IiMwYTJhMTgiLz4KICA8ZyBmaWxsPSIjMWE1YzJhIiBvcGFjaXR5PSIwLjciPgogICAgPGVsbGlwc2UgY3g9IjE1MCIgY3k9IjU2MCIgcng9IjYwIiByeT0iMjAiLz4KICAgIDxlbGxpcHNlIGN4PSI2NTAiIGN5PSI1NTUiIHJ4PSI1NSIgcnk9IjE4Ii8+CiAgICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iNTU4IiByeD0iNzAiIHJ5PSIxOCIvPgogIDwvZz4KICA8dGV4dCB4PSI0MDAiIHk9IjQ0MCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhIiBmb250LXdlaWdodD0iYm9sZCIgb3BhY2l0eT0iMC45Ij5Db21tdW5pdHkgRmlyc3Q8L3RleHQ+CiAgPHRleHQgeD0iNDAwIiB5PSI0NjgiIGZpbGw9IiNmNWE2MjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtZmFtaWx5PSJBcmlhbCI+VW5pdGluZyBNaW5kcyBmb3IgYSBDaGFuZ2U8L3RleHQ+Cjwvc3ZnPg==" alt="Community"/><div class="overlay"><span class="overlay-label">Community Together</span></div></div>
+  <div class="gallery-masonry" id="galleryGrid">
+    <div class="gal-item" data-idx="0"><img src="InAmigos_Volunteers.png" alt="Volunteers"/><div class="gal-item-overlay"><span class="gal-lbl">#InAmigos Volunteers</span></div></div>
+    <div class="gal-item" data-idx="1"><img src="seva.png" alt="Seva"/><div class="gal-item-overlay"><span class="gal-lbl">Project Seva</span></div></div>
+    <div class="gal-item" data-idx="2"><img src="community.jpg" alt="Community"/><div class="gal-item-overlay"><span class="gal-lbl">Community</span></div></div>
+    <div class="gal-item" data-idx="3"><img src="project_prakriti.png" alt="Prakriti"/><div class="gal-item-overlay"><span class="gal-lbl">Project Prakriti</span></div></div>
+    <div class="gal-item" data-idx="4"><img src="bachpansala.png" alt="BachpanSala"/><div class="gal-item-overlay"><span class="gal-lbl">BachpanSala</span></div></div>
+    <div class="gal-item" data-idx="5"><img src="Screenshot 2026-05-27 at 11.13.07 AM.png" alt="Food Drive"/><div class="gal-item-overlay"><span class="gal-lbl">Food Drive</span></div></div>
+    <div class="gal-item" data-idx="6"><img src="project_udaan.png" alt="Udaan"/><div class="gal-item-overlay"><span class="gal-lbl">Project Udaan</span></div></div>
+    <div class="gal-item" data-idx="7"><img src="Screenshot 2026-05-27 at 11.13.37 AM.png" alt="Education"/><div class="gal-item-overlay"><span class="gal-lbl">Education</span></div></div>
+    <div class="gal-item" data-idx="8"><img src="project_jeev.png" alt="Project Jeev"/><div class="gal-item-overlay"><span class="gal-lbl">Project Jeev</span></div></div>
+    <div class="gal-item" data-idx="9"><img src="Screenshot 2026-05-27 at 11.14.02 AM.png" alt="Trees"/><div class="gal-item-overlay"><span class="gal-lbl">Tree Plantation</span></div></div>
+    <div class="gal-item" data-idx="10"><img src="project_vikas.png" alt="Vikas"/><div class="gal-item-overlay"><span class="gal-lbl">Project Vikas</span></div></div>
+    <div class="gal-item" data-idx="11"><img src="Screenshot 2026-05-27 at 11.14.35 AM.png" alt="Women"/><div class="gal-item-overlay"><span class="gal-lbl">Women Rising</span></div></div>
+    <div class="gal-item" data-idx="12"><img src="Screenshot 2026-05-27 at 11.18.17 AM.png" alt="Animals"/><div class="gal-item-overlay"><span class="gal-lbl">Animal Care</span></div></div>
   </div>
 </section>
 
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <button class="lb-close" id="lbClose">&times;</button>
-  <button class="lb-prev" id="lbPrev">&#8249;</button>
-  <img src="" id="lbImg" alt="Gallery"/>
-  <button class="lb-next" id="lbNext">&#8250;</button>
+  <div class="lb-img-wrap">
+    <button class="lb-close" id="lbClose">&times;</button>
+    <img id="lbImg" src="" alt=""/>
+    <button class="lb-nav lb-prev" id="lbPrev">&#8249;</button>
+    <button class="lb-nav lb-next" id="lbNext">&#8250;</button>
+  </div>
 </div>
 
-<section class="join-section" id="join">
-  <div class="section-tag" style="background:rgba(245,166,35,0.2);color:var(--amber)">Get Involved</div>
-  <h2 class="section-title">Be the <span style="color:var(--amber)">Change</span> You Wish to See</h2>
-  <p>Join thousands of Amigos working together to build a more compassionate, inclusive, and sustainable India.</p>
-  <div class="join-buttons">
-    <a href="https://forms.gle/AB4c1hLaDDmtrKGU7" target="_blank" class="btn-primary">Volunteer Now</a>
-    <a href="https://rzp.io/l/kWQ87HP" target="_blank" class="btn-white">Donate Today</a>
+<!-- JOIN / CTA -->
+<section class="cta-section" id="join">
+  <div class="cta-bg-text">AMIGOS</div>
+  <div class="tag" style="justify-content:center">Get Involved</div>
+  <h2 class="sec-title" style="color:white;margin-bottom:20px">Be the <em style="color:var(--gold)">Change</em><br/>You Wish to See</h2>
+  <p class="sec-sub" style="color:rgba(255,255,255,0.55);margin:0 auto 50px">Join thousands of Amigos building a more compassionate, inclusive, and sustainable India — one project at a time.</p>
+  <div class="cta-btns">
+    <a href="https://forms.gle/AB4c1hLaDDmtrKGU7" target="_blank" class="btn-gold">Volunteer Now</a>
+    <a href="https://rzp.io/l/kWQ87HP" target="_blank" class="btn-ghost" style="color:white">Donate Today</a>
   </div>
-  <div class="join-ways">
-    <div class="join-way"><div class="join-way-icon">&#129306;</div><h4>Volunteer</h4><p>Join ground campaigns and make a direct impact</p></div>
-    <div class="join-way"><div class="join-way-icon">&#128176;</div><h4>Donate</h4><p>80G tax-exempt &amp; fully transparent</p></div>
-    <div class="join-way"><div class="join-way-icon">&#128226;</div><h4>Spread the Word</h4><p>Share using #InAmigos on social media</p></div>
-    <div class="join-way"><div class="join-way-icon">&#127970;</div><h4>CSR Partnership</h4><p>Collaborate as a corporate partner via CSR-1</p></div>
+  <div class="join-cards">
+    <div class="join-card"><div class="ji">&#129306;</div><h4>Volunteer</h4><p>Join campaigns &amp; make direct impact on the ground</p></div>
+    <div class="join-card"><div class="ji">&#128176;</div><h4>Donate</h4><p>80G tax-exempt &amp; fully transparent use of funds</p></div>
+    <div class="join-card"><div class="ji">&#128226;</div><h4>Amplify</h4><p>Share #InAmigos and spread our mission far and wide</p></div>
+    <div class="join-card"><div class="ji">&#127970;</div><h4>CSR Partner</h4><p>Corporate collaborations via CSR-1 registration</p></div>
+    <div class="join-card"><div class="ji">&#128187;</div><h4>Intern</h4><p>Learn while contributing through Project Vikas</p></div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <div class="nav-logo">In<span style="color:var(--amber)">Amigos</span></div>
-    <p>Uniting minds for a change. A Section 8 NGO committed to building a more inclusive and empowered India.</p>
-    <div class="social-links">
-      <a href="https://www.linkedin.com/company/inamigos-foundation" target="_blank">in</a>
-      <a href="https://instagram.com/inamigos" target="_blank">ig</a>
-      <a href="https://www.facebook.com/share/1CeyCkB3uL/" target="_blank">fb</a>
+  <div class="ft-brand">
+    <a class="nav-logo" href="#">In<em>Amigos</em></a>
+    <p>Uniting minds for a change. A Section 8 NGO committed to building a more inclusive, compassionate and empowered India — one life at a time.</p>
+    <div class="socials">
+      <a href="https://www.linkedin.com/company/inamigos-foundation" target="_blank" title="LinkedIn">in</a>
+      <a href="https://instagram.com/inamigos" target="_blank" title="Instagram">ig</a>
+      <a href="https://www.facebook.com/share/1CeyCkB3uL/" target="_blank" title="Facebook">fb</a>
     </div>
   </div>
-  <div class="footer-col">
+  <div class="ft-col">
     <h5>Projects</h5>
     <ul>
       <li><a href="#projects">Project Seva</a></li>
@@ -368,7 +636,7 @@
       <li><a href="#projects">Project Vikas</a></li>
     </ul>
   </div>
-  <div class="footer-col">
+  <div class="ft-col">
     <h5>Contact</h5>
     <ul>
       <li><a href="mailto:support@inamigosfoundation.org.in">support@inamigosfoundation.org.in</a></li>
@@ -378,25 +646,73 @@
     </ul>
   </div>
 </footer>
-<div class="footer-bottom">
-  &copy; 2024 InAmigos Foundation. All rights reserved. | Reg. under Section 8, Companies Act 2013 | Designed with &hearts; for <a href="#">InAmigos</a>
+<div class="ft-bottom">
+  <span>&copy; 2024 InAmigos Foundation &middot; Section 8, Companies Act 2013 &middot; <span class="ft-hashtag">#InAmigos</span></span>
+  <span>Designed with &hearts; for a better India</span>
 </div>
 
 <script>
-  const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Custom cursor
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button,.proj-card,.gal-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='6px';cur.style.height='6px';ring.style.width='56px';ring.style.height='56px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+});
 
-  const imgs = Array.from(document.querySelectorAll('#galleryGrid .gallery-item img'));
-  const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
-  let cur=0;
-  function openLb(i){cur=i;lbImg.src=imgs[i].src;lb.classList.add('active');document.body.style.overflow='hidden';}
-  function closeLb(){lb.classList.remove('active');document.body.style.overflow='';}
-  document.querySelectorAll('#galleryGrid .gallery-item').forEach((el,i)=>el.addEventListener('click',()=>openLb(i)));
-  document.getElementById('lbClose').addEventListener('click',closeLb);
-  document.getElementById('lbPrev').addEventListener('click',()=>{cur=(cur-1+imgs.length)%imgs.length;lbImg.src=imgs[cur].src;});
-  document.getElementById('lbNext').addEventListener('click',()=>{cur=(cur+1)%imgs.length;lbImg.src=imgs[cur].src;});
-  lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
-  document.addEventListener('keydown',e=>{if(!lb.classList.contains('active'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')document.getElementById('lbPrev').click();if(e.key==='ArrowRight')document.getElementById('lbNext').click();});
+// Navbar scroll
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+
+// Scroll reveal
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
+
+// Counter animation
+function animCounter(el,target,suffix){
+  const dur=2000,step=16,total=dur/step;
+  let cur=0,count=0;
+  const t=setInterval(()=>{
+    count++;
+    cur=Math.round(target*(count/total));
+    el.textContent=cur.toLocaleString()+(suffix||'');
+    if(count>=total){el.textContent=(target>=1000?target.toLocaleString():target)+(suffix||'');clearInterval(t);}
+  },step);
+}
+const counterObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    const el=e.target,val=+el.dataset.val;
+    const suffix=val>=1000?'+':'';
+    animCounter(el,val,suffix);
+    counterObs.unobserve(el);
+  }
+}),{threshold:0.5});
+document.querySelectorAll('.stat-num[data-val]').forEach(el=>counterObs.observe(el));
+
+// Gallery lightbox
+const galleryImgs=Array.from(document.querySelectorAll('#galleryGrid .gal-item img'));
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+let cur2=0;
+function openLb(i){cur2=i;lbImg.src=galleryImgs[i].src;lb.classList.add('active');document.body.style.overflow='hidden';}
+function closeLb(){lb.classList.remove('active');document.body.style.overflow='';}
+document.querySelectorAll('#galleryGrid .gal-item').forEach((el,i)=>el.addEventListener('click',()=>openLb(i)));
+document.getElementById('lbClose').addEventListener('click',closeLb);
+document.getElementById('lbPrev').addEventListener('click',()=>{cur2=(cur2-1+galleryImgs.length)%galleryImgs.length;lbImg.src=galleryImgs[cur2].src;});
+document.getElementById('lbNext').addEventListener('click',()=>{cur2=(cur2+1)%galleryImgs.length;lbImg.src=galleryImgs[cur2].src;});
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lightbox'))closeLb();});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('active'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')document.getElementById('lbPrev').click();
+  if(e.key==='ArrowRight')document.getElementById('lbNext').click();
+});
+
+// Staggered card animations
+document.querySelectorAll('.proj-card').forEach((c,i)=>{c.style.transitionDelay=(i*0.08)+'s';});
+document.querySelectorAll('.imp-card').forEach((c,i)=>{c.style.transitionDelay=(i*0.06)+'s';});
 </script>
 </body>
 </html>
